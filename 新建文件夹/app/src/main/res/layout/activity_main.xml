@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <Button
+        android:id="@+id/bt_sms"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="smsBackup"
+        android:text="备份短信" />
+
+    <Button
+        android:id="@+id/bt_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="contactBackup"
+        android:text="备份联系人" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="callLog"
+        android:text="备份通话记录" />
+
+    <ListView
+        android:id="@+id/lv_show"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </ListView>
+
+    <LinearLayout
+        android:id="@+id/ll_opt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" >
+
+        <Button
+            android:id="@+id/bt_del"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="delFile"
+            android:text="删除" />
+
+        <Button
+            android:id="@+id/bt_upload"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="uploadFile"
+            android:text="上传" />
+    </LinearLayout>
+
+</LinearLayout>
