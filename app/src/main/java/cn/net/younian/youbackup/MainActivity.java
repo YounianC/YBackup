@@ -3,14 +3,19 @@ package cn.net.younian.youbackup;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
+import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.res.AssetFileDescriptor;
+import android.database.Cursor;
 import android.icu.text.DateFormat;
 import android.icu.text.SimpleDateFormat;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -31,7 +36,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +46,9 @@ import java.util.List;
 import cn.net.younian.youbackup.adapter.FileAdapter;
 import cn.net.younian.youbackup.asynctask.CallLogTask;
 import cn.net.younian.youbackup.asynctask.ContactTask;
+import cn.net.younian.youbackup.asynctask.ContactTaskRestore;
 import cn.net.younian.youbackup.asynctask.SmsTask;
+import cn.net.younian.youbackup.asynctask.SmsTaskRestore;
 import cn.net.younian.youbackup.entity.FileInfo;
 
 
@@ -55,6 +64,8 @@ public class MainActivity extends AppCompatActivity
     private List<FileInfo> list;
     @SuppressLint("SimpleDateFormat")
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH_mm");
+
+    private String defaultPath = Environment.getExternalStorageDirectory() + "/YBackUp";
 
 
     @Override
@@ -125,6 +136,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
+            try {
+                AsyncTask<Void, Void, String> smsTask = new ContactTaskRestore(this, "", new File(baseFile, "sms" + format.format(new Date()) + ".xml"));
+                smsTask.execute();
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                Log.w(TAG, e.toString());
+            }
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
 
@@ -155,8 +173,8 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 FileInfo info = (FileInfo) parent.getItemAtPosition(position);
-				/*info.setChecked(!info.isChecked());
-				fileAdapter.notifyDataSetChanged();
+                /*info.setChecked(!info.isChecked());
+                fileAdapter.notifyDataSetChanged();
 				if (fileAdapter.isExistChecked()) {
 					ll_opt.setVisibility(View.VISIBLE);
 				} else {
@@ -165,13 +183,13 @@ public class MainActivity extends AppCompatActivity
                 Log.i(TAG, "name = " + info.getName());
             }
         });
-        baseFile = new File(Environment.getExternalStorageDirectory() + "/catchBackup");
+        baseFile = new File(defaultPath);
         if (!baseFile.exists()) {
             baseFile.mkdirs();
         }
     }
 
-    public void delFile(View view){
+    public void delFile(View view) {
         AlertDialog.Builder builder = new Builder(this);
         builder.setTitle("提示")
                 .setMessage("确定要删除吗？")
@@ -181,7 +199,7 @@ public class MainActivity extends AppCompatActivity
                     public void onClick(DialogInterface dialog, int which) {
                         List<FileInfo> files = new ArrayList<FileInfo>();
                         files = fileAdapter.getCheckedFile(files);
-                        for(FileInfo info : files){
+                        for (FileInfo info : files) {
                             File file = new File(baseFile, info.getName());
                             if (file.exists()) {
                                 file.delete();
@@ -195,17 +213,49 @@ public class MainActivity extends AppCompatActivity
                 .setNegativeButton("取消", null).create().show();
     }
 
+    public void restoreByFile(View view) {
+        AlertDialog.Builder builder = new Builder(this);
+        builder.setTitle("提示")
+                .setMessage("确定要还原吗？")
+                .setPositiveButton("确定", new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        List<FileInfo> files = new ArrayList<FileInfo>();
+                        files = fileAdapter.getCheckedFile(files);
+                        for (FileInfo info : files) {
+                            File file = new File(baseFile, info.getName());
+                            if (file.exists()) {
+                                try {
+                                    AsyncTask<Void, Void, String> smsTask = new SmsTaskRestore(getApplication(), file);
+                                    smsTask.execute();
+                                } catch (FileNotFoundException e) {
+                                    e.printStackTrace();
+                                    Log.w(TAG, e.toString());
+                                }
+                            }
+                        }
+                        Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+                        loadData();
+                        ll_opt.setVisibility(View.GONE);
+                    }
+                })
+                .setNegativeButton("取消", null).create().show();
+    }
+
     public void loadData() {
         list.clear();
         String[] strs = baseFile.list();
-        for(String str : strs){
-            list.add(new FileInfo(str, false));
+        if (strs != null && strs.length > 0) {
+            Toast.makeText(this, "导入" + strs.length + "个文件！", Toast.LENGTH_SHORT).show();
+            for (String str : strs) {
+                list.add(new FileInfo(str, false));
+            }
         }
         fileAdapter.setData(list);
         fileAdapter.notifyDataSetChanged();
     }
 
-    public void smsBackup(View view){
+    public void smsBackup(View view) {
         try {
             AsyncTask<Void, Void, String> smsTask = new SmsTask(this, new File(baseFile, "sms" + format.format(new Date()) + ".xml"));
             smsTask.execute();
@@ -215,16 +265,16 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void contactBackup(View view){
+    public void contactBackup(View view) {
         try {
-            new ContactTask(this, new File(baseFile, "contact" + format.format(new Date()) + ".xml")).execute();
+            new ContactTask(this, defaultPath, new File(baseFile, "contact" + format.format(new Date()) + ".xml")).execute();
         } catch (FileNotFoundException e) {
             Log.w(TAG, e.toString());
             e.printStackTrace();
         }
     }
 
-    public void callLog(View v){
+    public void callLog(View v) {
         try {
             new CallLogTask(this, new File(baseFile, "calllog" + format.format(new Date()) + ".xml")).execute();
         } catch (FileNotFoundException e) {
@@ -232,5 +282,4 @@ public class MainActivity extends AppCompatActivity
             e.printStackTrace();
         }
     }
-
 }
