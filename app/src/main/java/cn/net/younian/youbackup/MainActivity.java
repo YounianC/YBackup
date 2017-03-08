@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity
     public static final String TAG = "main";
     private File baseFile;
     private ListView lv_show;
-    public LinearLayout ll_opt;
     private FileAdapter fileAdapter;
     private List<FileInfo> list;
     @SuppressLint("SimpleDateFormat")
@@ -122,8 +121,8 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_delete) {
+            delFile();
         }
 
         return super.onOptionsItemSelected(item);
@@ -164,7 +163,6 @@ public class MainActivity extends AppCompatActivity
     private void setupViews() {
         list = new ArrayList<FileInfo>();
         lv_show = (ListView) findViewById(R.id.lv_show);
-        ll_opt = (LinearLayout) findViewById(R.id.ll_opt);
         fileAdapter = new FileAdapter(this, list);
         lv_show.setAdapter(fileAdapter);
         lv_show.setOnItemClickListener(new OnItemClickListener() {
@@ -189,7 +187,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public void delFile(View view) {
+    public void delFile() {
         AlertDialog.Builder builder = new Builder(this);
         builder.setTitle("提示")
                 .setMessage("确定要删除吗？")
@@ -207,7 +205,6 @@ public class MainActivity extends AppCompatActivity
                         }
                         Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                         loadData();
-                        ll_opt.setVisibility(View.GONE);
                     }
                 })
                 .setNegativeButton("取消", null).create().show();
@@ -236,7 +233,6 @@ public class MainActivity extends AppCompatActivity
                         }
                         Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                         loadData();
-                        ll_opt.setVisibility(View.GONE);
                     }
                 })
                 .setNegativeButton("取消", null).create().show();

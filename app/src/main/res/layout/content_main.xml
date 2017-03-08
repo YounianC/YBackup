@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:onClick="smsBackup"
             android:text="备份短信" />
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,6 +34,7 @@
             android:layout_below="@+id/bt_contact"
             android:onClick="callLog"
             android:text="备份通话记录" />
+
         <Button
             android:id="@+id/bt_contact"
             android:layout_width="match_parent"
@@ -46,36 +48,11 @@
 
     <ListView
         android:id="@+id/lv_show"
+        style="@android:style/Widget.DeviceDefault.ExpandableListView"
         android:layout_width="match_parent"
         android:layout_height="246dp"
         android:layout_below="@+id/main"
         android:layout_marginTop="13dp"
-        style="@android:style/Widget.DeviceDefault.ExpandableListView"
-        android:background="@android:color/darker_gray"></ListView>
+        android:layout_alignParentBottom="true"></ListView>
 
-    <LinearLayout
-        android:id="@+id/ll_opt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-
-        <Button
-            android:id="@+id/bt_del"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="delFile"
-            android:text="删除" />
-
-        <Button
-            android:id="@+id/bt_upload"
-            android:layout_width="0dip"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="restoreByFile"
-            android:text="上传" />
-    </LinearLayout>
 </RelativeLayout>
