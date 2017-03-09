@@ -1,25 +1,17 @@
 package cn.net.younian.youbackup;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.content.res.AssetFileDescriptor;
-import android.database.Cursor;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.ContactsContract;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -31,25 +23,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.net.younian.youbackup.adapter.FileAdapter;
 import cn.net.younian.youbackup.asynctask.CallLogTask;
 import cn.net.younian.youbackup.asynctask.ContactTask;
-import cn.net.younian.youbackup.asynctask.ContactTaskRestore;
 import cn.net.younian.youbackup.asynctask.SmsTask;
 import cn.net.younian.youbackup.asynctask.SmsTaskRestore;
 import cn.net.younian.youbackup.entity.FileInfo;
+import cn.net.younian.youbackup.util.Constants;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
@@ -61,11 +49,12 @@ public class MainActivity extends AppCompatActivity
     private ListView lv_show;
     private FileAdapter fileAdapter;
     private List<FileInfo> list;
-    @SuppressLint("SimpleDateFormat")
-    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH_mm");
 
-    private String defaultPath = Environment.getExternalStorageDirectory() + "/YBackUp";
+    final private FragmentManager fm = getSupportFragmentManager();
 
+    private Fragment mFragment;
+    private Fragment mainFragment;
+    private Fragment operatelogFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,15 +62,6 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -91,6 +71,11 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        mainFragment = new MainFragment();
+        mFragment = mainFragment;
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.fragment_container, mainFragment).commit();
 
         setupViews();
         loadData();
@@ -134,30 +119,48 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            try {
+        if (id == R.id.nav_main) {
+            if (mainFragment == null)
+                mainFragment = new MainFragment();
+            switchContent(item, mFragment, mainFragment);
+           /* try {
                 AsyncTask<Void, Void, String> smsTask = new ContactTaskRestore(this, "", new File(baseFile, "sms" + format.format(new Date()) + ".xml"));
                 smsTask.execute();
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
                 Log.w(TAG, e.toString());
-            }
+            }*/
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
         } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            if (operatelogFragment == null)
+                operatelogFragment = new ManualBackupFragment();
+            switchContent(item, mFragment, operatelogFragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void switchContent(MenuItem item, Fragment from, Fragment to) {
+        Toast.makeText(this, "切换", Toast.LENGTH_SHORT).show();
+        if (mFragment != to) {
+            mFragment = to;
+            //添加渐隐渐现的动画
+            Bundle bundle = new Bundle();
+            bundle.putString("title", item.getTitle().toString());
+            setTitle(item.getTitle().toString());
+            to.setArguments(bundle);
+
+            FragmentTransaction ft = fm.beginTransaction();
+           /* ft.setCustomAnimations( R.animator.fragment_slide_left_enter,
+                    R.animator.fragment_slide_right_exit);*/
+            if (!to.isAdded()) {    // 先判断是否被add过
+                ft.hide(from).add(R.id.fragment_container, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+            } else {
+                ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
+            }
+        }
     }
 
     private void setupViews() {
@@ -181,10 +184,24 @@ public class MainActivity extends AppCompatActivity
                 Log.i(TAG, "name = " + info.getName());
             }
         });
-        baseFile = new File(defaultPath);
+        baseFile = new File(Constants.defaultPath);
         if (!baseFile.exists()) {
             baseFile.mkdirs();
         }
+    }
+
+    public static void deleteAllFilesOfDir(File path) {
+        if (!path.exists())
+            return;
+        if (path.isFile()) {
+            path.delete();
+            return;
+        }
+        File[] files = path.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            deleteAllFilesOfDir(files[i]);
+        }
+        path.delete();
     }
 
     public void delFile() {
@@ -200,7 +217,7 @@ public class MainActivity extends AppCompatActivity
                         for (FileInfo info : files) {
                             File file = new File(baseFile, info.getName());
                             if (file.exists()) {
-                                file.delete();
+                                deleteAllFilesOfDir(file);
                             }
                         }
                         Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
@@ -244,7 +261,7 @@ public class MainActivity extends AppCompatActivity
         if (strs != null && strs.length > 0) {
             Toast.makeText(this, "导入" + strs.length + "个文件！", Toast.LENGTH_SHORT).show();
             for (String str : strs) {
-                list.add(new FileInfo(str, false));
+                list.add(0, new FileInfo(str, false));
             }
         }
         fileAdapter.setData(list);
@@ -253,8 +270,7 @@ public class MainActivity extends AppCompatActivity
 
     public void smsBackup(View view) {
         try {
-            AsyncTask<Void, Void, String> smsTask = new SmsTask(this, new File(baseFile, "sms" + format.format(new Date()) + ".xml"));
-            smsTask.execute();
+            new SmsTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.w(TAG, e.toString());
@@ -263,7 +279,7 @@ public class MainActivity extends AppCompatActivity
 
     public void contactBackup(View view) {
         try {
-            new ContactTask(this, defaultPath, new File(baseFile, "contact" + format.format(new Date()) + ".xml")).execute();
+            new ContactTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
             Log.w(TAG, e.toString());
             e.printStackTrace();
@@ -272,10 +288,21 @@ public class MainActivity extends AppCompatActivity
 
     public void callLog(View v) {
         try {
-            new CallLogTask(this, new File(baseFile, "calllog" + format.format(new Date()) + ".xml")).execute();
+            new CallLogTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
             Log.w(TAG, e.toString());
             e.printStackTrace();
         }
     }
+
+    public void quickBackup(View view) {
+        smsBackup(view);
+        contactBackup(view);
+        callLog(view);
+    }
+
+    public void manualBackup(View view) {
+
+    }
+
 }

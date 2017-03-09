@@ -5,19 +5,24 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.util.Constants;
 import cn.net.younian.youbackup.util.XMLWriter;
 
 
+@RequiresApi(api = Build.VERSION_CODES.N)
 public class CallLogTask extends AsyncTask<Void, Void, String> {
 
     private Context context;
@@ -35,14 +40,20 @@ public class CallLogTask extends AsyncTask<Void, Void, String> {
     private static final String DATE = "date";
     private static final String DURATION = "duration";
 
-    public CallLogTask(Context context, File file) throws FileNotFoundException {
+    public CallLogTask(Context context, String defaultPath) throws FileNotFoundException {
+        String path = defaultPath + "/" + Constants.formatDate.format(new Date());
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File xmlFile = new File(file, "call" + Constants.formatTime.format(new Date()) + ".xml");
         pbarDialog = new ProgressDialog(context);
         pbarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        pbarDialog.setMessage("test...");
+        pbarDialog.setMessage("通话记录备份中...");
         pbarDialog.setCancelable(false);
 
         resolver = context.getContentResolver();
-        writer = new XMLWriter(file);
+        writer = new XMLWriter(xmlFile);
         this.context = context;
     }
 

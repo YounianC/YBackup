@@ -7,12 +7,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.net.younian.youbackup.MainActivity;
 import cn.net.younian.youbackup.R;
 import cn.net.younian.youbackup.entity.FileInfo;
 
@@ -91,12 +89,11 @@ public class FileAdapter extends BaseAdapter {
         holder.cb_file.setText(info.getName());
         holder.cb_file.setChecked(info.isChecked());
         holder.cb_file.setOnClickListener(new OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 info.setChecked(!info.isChecked());
                 notifyDataSetChanged();
-                Toast.makeText(MainActivity.this, "ceshi ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "ceshi ", Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;

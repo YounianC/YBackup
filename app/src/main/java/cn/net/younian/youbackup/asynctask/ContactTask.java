@@ -1,13 +1,10 @@
 package cn.net.younian.youbackup.asynctask;
 
-import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -25,6 +22,7 @@ import java.io.IOException;
 import java.util.Date;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.util.Constants;
 import cn.net.younian.youbackup.util.XMLWriter;
 
 
@@ -47,18 +45,22 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
     private static final String NAME = "name";
     private static final String PHONE = "phone";
     private String defaultPath;
-    @SuppressLint("SimpleDateFormat")
-    private DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH_mm");
 
-    public ContactTask(Context context, String defaultPath, File file) throws FileNotFoundException {
-        this.defaultPath = defaultPath;
+    public ContactTask(Context context, String defaultPath) throws FileNotFoundException {
+        String path = defaultPath + "/" + Constants.formatDate.format(new Date());
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        File xmlFile = new File(file, "contacts" + Constants.formatTime.format(new Date()) + ".xml");
+        this.defaultPath = path;
         pbarDialog = new ProgressDialog(context);
         pbarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pbarDialog.setMessage("联系人备份中...");
         pbarDialog.setCancelable(false);
 
         resolver = context.getContentResolver();
-        writer = new XMLWriter(file);
+        writer = new XMLWriter(xmlFile);
         this.context = context;
     }
 
@@ -153,7 +155,7 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
      * Exporting contacts from the phone
      */
     public void exportContacts() throws Exception {
-        String path = defaultPath + "/" + "contact" + format.format(new Date()) + ".vcf";
+        String path = defaultPath + "/" + "contacts" + Constants.formatTime.format(new Date()) + ".vcf";
 
         ContentResolver cr = resolver;
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
