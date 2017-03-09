@@ -13,8 +13,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
@@ -35,11 +37,14 @@ public class MainActivity extends AppCompatActivity
 
     private Fragment mFragment;
     private Fragment mainFragment;
-    private Fragment munalBackupFragment;
+    private Fragment manulBackupFragment;
     private Fragment settingFragment;
     private Fragment restoreFragment;
 
     private FloatingActionsMenu menuMultipleActions;
+    private Menu menu;
+
+    private long firstBackPressedTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +75,17 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        } else if (menuMultipleActions.isExpanded()) {
+            menuMultipleActions.collapse();
+        } else if (!mFragment.getClass().getName().endsWith("MainFragment")) {
+            switchContent("首页", mFragment, mainFragment);
         } else {
-            super.onBackPressed();
+            if (System.currentTimeMillis() - firstBackPressedTime > 300) {
+                firstBackPressedTime = System.currentTimeMillis();
+                Toast.makeText(this, "双击返回键退出", Toast.LENGTH_SHORT).show();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -79,6 +93,7 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        this.menu = menu;
         return true;
     }
 
@@ -130,6 +145,12 @@ public class MainActivity extends AppCompatActivity
             bundle.putString("title", item.getTitle().toString());
             to.setArguments(bundle);*/
 
+            if (!mFragment.getClass().getName().endsWith("MainFragment")) {
+                this.menu.getItem(0).setVisible(false);
+            } else {
+                this.menu.getItem(0).setVisible(true);
+            }
+
             FragmentTransaction ft = fm.beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             if (!to.isAdded()) {    // 先判断是否被add过
@@ -145,7 +166,14 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void notifyRestore(FileInfo info) {
-        ((RestoreFragment) restoreFragment).restore(info);
+        if (restoreFragment == null) {
+            restoreFragment = new RestoreFragment();
+            /*Bundle bundle = new Bundle();
+            bundle.putString("path", info.getName());
+            restoreFragment.setArguments(bundle);*/
+        }
+        ((RestoreFragment) restoreFragment).updateInfo(info);
+        switchContent("还原 - " + info.getName(), mFragment, restoreFragment);
     }
 
     public void smsBackup(View view) {
@@ -180,9 +208,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void manualBackup(View view) {
-        if (munalBackupFragment == null)
-            munalBackupFragment = new ManualBackupFragment();
-        switchContent("手动备份", mFragment, munalBackupFragment);
+        if (manulBackupFragment == null)
+            manulBackupFragment = new ManualBackupFragment();
+        switchContent("手动备份", mFragment, manulBackupFragment);
         menuMultipleActions.toggle();
     }
 

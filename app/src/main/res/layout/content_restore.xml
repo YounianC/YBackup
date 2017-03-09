@@ -13,31 +13,79 @@
     tools:context="cn.net.younian.youbackup.MainActivity">
 
     <RelativeLayout
+        android:textSize="65sp"
         android:id="@+id/backup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/activity_vertical_margin">
 
-        <CheckBox
-            android:id="@+id/setting_export_vcf"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="31dp"
-            android:layout_marginStart="31dp"
-            android:text="同时导出vcf联系人" />
+        <RelativeLayout
+            android:id="@+id/restore_group1"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp">
 
-        <CheckBox
-            android:id="@+id/setting_auto_backup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@id/setting_export_vcf"
-            android:layout_marginLeft="31dp"
-            android:layout_marginStart="31dp"
-            android:text="自动备份" />
+            <CheckBox
+                android:id="@+id/restore_check_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="还原联系人" />
+
+            <Spinner
+                android:id="@+id/restore_spinner_contacts"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/restore_check_contacts" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/restore_group2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/restore_group1">
+
+            <CheckBox
+                android:id="@+id/restore_check_sms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="还原短信" />
+
+            <Spinner
+                android:id="@+id/restore_spinner_sms"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/restore_check_sms" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/restore_group3"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_below="@id/restore_group2">
+
+            <CheckBox
+                android:id="@+id/restore_check_log"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp"
+                android:text="还原通话记录" />
+
+            <Spinner
+                android:id="@+id/restore_spinner_log"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/restore_check_log" />
+        </RelativeLayout>
     </RelativeLayout>
 </RelativeLayout>

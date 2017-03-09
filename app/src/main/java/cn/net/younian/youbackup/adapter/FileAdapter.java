@@ -9,11 +9,13 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.MainFragment;
 import cn.net.younian.youbackup.R;
 import cn.net.younian.youbackup.entity.FileInfo;
 
@@ -83,13 +85,21 @@ public class FileAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_file, null);
             holder = new ViewHolder();
             holder.cb_file = (CheckBox) convertView.findViewById(R.id.cb_file);
+            holder.file_name = (TextView) convertView.findViewById(R.id.file_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
         final FileInfo info = data.get(position);
-        holder.cb_file.setText(info.getName());
+        holder.file_name.setText(info.getName());
+        holder.file_name.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                restore(info);
+            }
+        });
         holder.cb_file.setChecked(info.isChecked());
         holder.cb_file.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -97,8 +107,6 @@ public class FileAdapter extends BaseAdapter {
             public void onClick(View v) {
                 info.setChecked(!info.isChecked());
                 notifyDataSetChanged();
-                restore(info);
-                //Toast.makeText(context, "ceshi ", Toast.LENGTH_SHORT).show();
             }
         });
         return convertView;
@@ -106,12 +114,13 @@ public class FileAdapter extends BaseAdapter {
 
     private class ViewHolder {
         public CheckBox cb_file;
+        public TextView file_name;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public final void restore(FileInfo info) {
-        MainActivity parentActivity = (MainActivity) context.getApplicationContext();
-        parentActivity.notifyRestore(info);
+        MainActivity mainFragment = (MainActivity) context;
+        mainFragment.notifyRestore(info);
     }
 
 }

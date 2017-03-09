@@ -47,7 +47,7 @@ public class MainFragment extends Fragment {
 
         lv_show = (ListView) view.findViewById(R.id.lv_show);
         list = new ArrayList<FileInfo>();
-        fileAdapter = new FileAdapter(view.getContext(), list);
+        fileAdapter = new FileAdapter(this.getContext(), list);
 
         lv_show.setAdapter(fileAdapter);
         lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,6 +73,19 @@ public class MainFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden)
+            cancelAllChecked();
+    }
+
+    private void cancelAllChecked() {
+        for (FileInfo fileInfo : list) {
+            fileInfo.setChecked(false);
+        }
+        fileAdapter.notifyDataSetChanged();
+    }
 
     public void delFile() {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
@@ -97,7 +110,7 @@ public class MainFragment extends Fragment {
                 .setNegativeButton("取消", null).create().show();
     }
 
-    public void restoreByFile(View view) {
+    public void notifyRestore(FileInfo info) {
         AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
         builder.setTitle("提示")
                 .setMessage("确定要还原吗？")
