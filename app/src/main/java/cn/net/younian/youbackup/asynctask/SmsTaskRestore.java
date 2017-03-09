@@ -4,12 +4,10 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.util.Xml;
 import android.widget.Toast;
 
@@ -22,7 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import cn.net.younian.youbackup.MainActivity;
-import cn.net.younian.youbackup.util.XMLWriter;
 
 
 public class SmsTaskRestore extends AsyncTask<Void, Void, String> {
@@ -77,7 +74,7 @@ public class SmsTaskRestore extends AsyncTask<Void, Void, String> {
         if (result != null) {
             // 将上下文转换为MainActivity，并调用loadData方法刷新数据
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.loadData();
+            mainActivity.notifyLoadData();
             Toast.makeText(context, "成功备份" + sumCount + "条短信", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "短信备份失败", Toast.LENGTH_SHORT).show();

@@ -10,10 +10,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="cn.net.younian.youbackup.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="cn.net.younian.youbackup.MainActivity">
 
-    <RelativeLayout
+   <!-- <RelativeLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,14 +43,13 @@
             android:layout_below="@+id/bt_sms"
             android:onClick="contactBackup"
             android:text="备份联系人" />
-    </RelativeLayout>
+    </RelativeLayout>-->
 
     <ListView
         android:id="@+id/lv_show"
         style="@android:style/Widget.DeviceDefault.ExpandableListView"
         android:layout_width="match_parent"
-        android:layout_height="246dp"
-        android:layout_below="@+id/main"
+        android:layout_height="match_parent"
         android:layout_marginTop="13dp"
         android:layout_alignParentBottom="true"></ListView>
 

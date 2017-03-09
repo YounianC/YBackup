@@ -9,6 +9,7 @@
     tools:context="cn.net.younian.youbackup.MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -22,38 +23,17 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </RelativeLayout>
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="30dp"
+        android:layout_height="match_parent"></FrameLayout>
 
-    <fragment
-        android:id="@+id/main_fragment"
-        android:name="cn.net.younian.youbackup.MainFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-    <fragment
-        android:id="@+id/manual_backup_fragment"
-        android:name="cn.net.younian.youbackup.ManualBackupFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
-
-    <!-- <include layout="@layout/content_main" />
-     <include layout="@layout/content_manual_backup" />-->
-
-    <!-- <android.support.design.widget.FloatingActionButton
-         android:id="@+id/fab"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_gravity="bottom|end"
-         android:layout_margin="@dimen/fab_margin"
-         app:srcCompat="@android:drawable/ic_dialog_email" />-->
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:id="@+id/multiple_actions"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="491dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
@@ -67,19 +47,21 @@
         fab:fab_labelStyle="@style/menu_labels_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_a"
+            android:id="@+id/quick_backup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="quickBackup"
+            fab:fab_icon="@drawable/quick_backup"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"
             fab:fab_title="快速备份" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/action_b"
+            android:id="@+id/manual_backup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="manualBackup"
+            fab:fab_icon="@drawable/manual_backup"
             fab:fab_colorNormal="@color/white"
             fab:fab_colorPressed="@color/white_pressed"
             fab:fab_title="手动备份" />

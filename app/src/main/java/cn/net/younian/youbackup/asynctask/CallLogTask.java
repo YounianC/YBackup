@@ -106,7 +106,7 @@ public class CallLogTask extends AsyncTask<Void, Void, String> {
         pbarDialog.dismiss();
         if (result != null) {
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.loadData();
+            mainActivity.notifyLoadData();
             Toast.makeText(context, "成功备份" + sumCount + "条通话记录", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "通话记录备份失败", Toast.LENGTH_SHORT).show();

@@ -112,7 +112,7 @@ public class SmsTask extends AsyncTask<Void, Void, String> {
         if (result != null) {
             // 将上下文转换为MainActivity，并调用loadData方法刷新数据
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.loadData();
+            mainActivity.notifyLoadData();
             Toast.makeText(context, "成功备份" + sumCount + "条短信", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "短信备份失败", Toast.LENGTH_SHORT).show();

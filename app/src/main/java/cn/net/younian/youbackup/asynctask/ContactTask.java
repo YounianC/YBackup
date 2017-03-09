@@ -138,7 +138,7 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
         if (result != null) {
             // 将上下文转换为MainActivity，并调用loadData方法刷新数据
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.loadData();
+            mainActivity.notifyLoadData();
             Toast.makeText(context, "成功备份" + sumCount + "个联系人", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "联系人备份失败", Toast.LENGTH_SHORT).show();

@@ -1,6 +1,8 @@
 package cn.net.younian.youbackup.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,6 +13,7 @@ import android.widget.CheckBox;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.net.younian.youbackup.MainActivity;
 import cn.net.younian.youbackup.R;
 import cn.net.younian.youbackup.entity.FileInfo;
 
@@ -89,10 +92,12 @@ public class FileAdapter extends BaseAdapter {
         holder.cb_file.setText(info.getName());
         holder.cb_file.setChecked(info.isChecked());
         holder.cb_file.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
                 info.setChecked(!info.isChecked());
                 notifyDataSetChanged();
+                restore(info);
                 //Toast.makeText(context, "ceshi ", Toast.LENGTH_SHORT).show();
             }
         });
@@ -101,6 +106,12 @@ public class FileAdapter extends BaseAdapter {
 
     private class ViewHolder {
         public CheckBox cb_file;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public final void restore(FileInfo info) {
+        MainActivity parentActivity = (MainActivity) context.getApplicationContext();
+        parentActivity.notifyRestore(info);
     }
 
 }

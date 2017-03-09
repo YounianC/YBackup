@@ -10,41 +10,34 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="cn.net.younian.youbackup.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    tools:context="cn.net.younian.youbackup.MainActivity">
 
     <RelativeLayout
         android:id="@+id/backup"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="visible">
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/activity_vertical_margin">
 
-        <Button
-            android:id="@+id/bt_sms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="smsBackup"
-            android:text="备份短信" />
-
-        <Button
+        <CheckBox
+            android:id="@+id/setting_export_vcf"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/bt_contact"
-            android:onClick="callLog"
-            android:text="备份通话记录" />
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="31dp"
+            android:layout_marginStart="31dp"
+            android:text="同时导出vcf联系人" />
 
-        <Button
-            android:id="@+id/bt_contact"
+        <CheckBox
+            android:id="@+id/setting_auto_backup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/bt_sms"
-            android:onClick="contactBackup"
-            android:text="备份联系人" />
+            android:layout_below="@id/setting_export_vcf"
+            android:layout_marginLeft="31dp"
+            android:layout_marginStart="31dp"
+            android:text="自动备份" />
     </RelativeLayout>
-
 </RelativeLayout>

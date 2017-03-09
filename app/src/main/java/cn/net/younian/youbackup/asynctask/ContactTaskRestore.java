@@ -26,7 +26,6 @@ public class ContactTaskRestore extends AsyncTask<Void, Void, String> {
     private int sumCount = 0;
     private int proNum = 0;
     private Uri uri = ContactsContract.Contacts.CONTENT_URI;
-    @SuppressLint("SimpleDateFormat")
 
     public ContactTaskRestore(Context context, String defaultPath, File file) throws FileNotFoundException {
         pbarDialog = new ProgressDialog(context);
@@ -87,7 +86,7 @@ public class ContactTaskRestore extends AsyncTask<Void, Void, String> {
         if (result != null) {
             // 将上下文转换为MainActivity，并调用loadData方法刷新数据
             MainActivity mainActivity = (MainActivity) context;
-            mainActivity.loadData();
+            mainActivity.notifyLoadData();
             Toast.makeText(context, "成功恢复" + sumCount + "个联系人", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "联系人备份失败", Toast.LENGTH_SHORT).show();

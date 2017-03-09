@@ -1,10 +1,5 @@
 package cn.net.younian.youbackup;
 
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -17,25 +12,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.File;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
 
-import cn.net.younian.youbackup.adapter.FileAdapter;
 import cn.net.younian.youbackup.asynctask.CallLogTask;
 import cn.net.younian.youbackup.asynctask.ContactTask;
 import cn.net.younian.youbackup.asynctask.SmsTask;
-import cn.net.younian.youbackup.asynctask.SmsTaskRestore;
 import cn.net.younian.youbackup.entity.FileInfo;
 import cn.net.younian.youbackup.util.Constants;
 
@@ -44,17 +31,15 @@ import cn.net.younian.youbackup.util.Constants;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static final String TAG = "main";
-    private File baseFile;
-    private ListView lv_show;
-    private FileAdapter fileAdapter;
-    private List<FileInfo> list;
-
     final private FragmentManager fm = getSupportFragmentManager();
 
     private Fragment mFragment;
     private Fragment mainFragment;
-    private Fragment operatelogFragment;
+    private Fragment munalBackupFragment;
+    private Fragment settingFragment;
+    private Fragment restoreFragment;
+
+    private FloatingActionsMenu menuMultipleActions;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,10 +60,9 @@ public class MainActivity extends AppCompatActivity
         mainFragment = new MainFragment();
         mFragment = mainFragment;
         FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.fragment_container, mainFragment).commit();
+        ft.add(R.id.fragment_container, mainFragment).show(mainFragment).commit();
 
-        setupViews();
-        loadData();
+        menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
     }
 
     @Override
@@ -107,7 +91,7 @@ public class MainActivity extends AppCompatActivity
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete) {
-            delFile();
+            ((MainFragment) mainFragment).delFile();
         }
 
         return super.onOptionsItemSelected(item);
@@ -122,19 +106,14 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_main) {
             if (mainFragment == null)
                 mainFragment = new MainFragment();
-            switchContent(item, mFragment, mainFragment);
-           /* try {
-                AsyncTask<Void, Void, String> smsTask = new ContactTaskRestore(this, "", new File(baseFile, "sms" + format.format(new Date()) + ".xml"));
-                smsTask.execute();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-                Log.w(TAG, e.toString());
-            }*/
+            switchContent(item.getTitle().toString(), mFragment, mainFragment);
+
             // Handle the camera action
         } else if (id == R.id.nav_manage) {
-            if (operatelogFragment == null)
-                operatelogFragment = new ManualBackupFragment();
-            switchContent(item, mFragment, operatelogFragment);
+            if (settingFragment == null)
+                settingFragment = new SettingFragment();
+            switchContent(item.getTitle().toString(), mFragment, settingFragment);
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -142,130 +121,31 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void switchContent(MenuItem item, Fragment from, Fragment to) {
-        Toast.makeText(this, "切换", Toast.LENGTH_SHORT).show();
+    public void switchContent(String title, Fragment from, Fragment to) {
         if (mFragment != to) {
             mFragment = to;
             //添加渐隐渐现的动画
-            Bundle bundle = new Bundle();
+            setTitle(title);
+           /* Bundle bundle = new Bundle();
             bundle.putString("title", item.getTitle().toString());
-            setTitle(item.getTitle().toString());
-            to.setArguments(bundle);
+            to.setArguments(bundle);*/
 
             FragmentTransaction ft = fm.beginTransaction();
-           /* ft.setCustomAnimations( R.animator.fragment_slide_left_enter,
-                    R.animator.fragment_slide_right_exit);*/
+            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             if (!to.isAdded()) {    // 先判断是否被add过
-                ft.hide(from).add(R.id.fragment_container, to).commit(); // 隐藏当前的fragment，add下一个到Activity中
+                ft.add(R.id.fragment_container, to).hide(from).show(to).commit(); // 隐藏当前的fragment，add下一个到Activity中
             } else {
                 ft.hide(from).show(to).commit(); // 隐藏当前的fragment，显示下一个
             }
         }
     }
 
-    private void setupViews() {
-        list = new ArrayList<FileInfo>();
-        lv_show = (ListView) findViewById(R.id.lv_show);
-        fileAdapter = new FileAdapter(this, list);
-        lv_show.setAdapter(fileAdapter);
-        lv_show.setOnItemClickListener(new OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                FileInfo info = (FileInfo) parent.getItemAtPosition(position);
-                /*info.setChecked(!info.isChecked());
-                fileAdapter.notifyDataSetChanged();
-				if (fileAdapter.isExistChecked()) {
-					ll_opt.setVisibility(View.VISIBLE);
-				} else {
-					ll_opt.setVisibility(View.GONE);
-				}*/
-                Log.i(TAG, "name = " + info.getName());
-            }
-        });
-        baseFile = new File(Constants.defaultPath);
-        if (!baseFile.exists()) {
-            baseFile.mkdirs();
-        }
+    public void notifyLoadData() {
+        ((MainFragment) mainFragment).loadData(false);
     }
 
-    public static void deleteAllFilesOfDir(File path) {
-        if (!path.exists())
-            return;
-        if (path.isFile()) {
-            path.delete();
-            return;
-        }
-        File[] files = path.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            deleteAllFilesOfDir(files[i]);
-        }
-        path.delete();
-    }
-
-    public void delFile() {
-        AlertDialog.Builder builder = new Builder(this);
-        builder.setTitle("提示")
-                .setMessage("确定要删除吗？")
-                .setPositiveButton("确定", new OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        List<FileInfo> files = new ArrayList<FileInfo>();
-                        files = fileAdapter.getCheckedFile(files);
-                        for (FileInfo info : files) {
-                            File file = new File(baseFile, info.getName());
-                            if (file.exists()) {
-                                deleteAllFilesOfDir(file);
-                            }
-                        }
-                        Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                        loadData();
-                    }
-                })
-                .setNegativeButton("取消", null).create().show();
-    }
-
-    public void restoreByFile(View view) {
-        AlertDialog.Builder builder = new Builder(this);
-        builder.setTitle("提示")
-                .setMessage("确定要还原吗？")
-                .setPositiveButton("确定", new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        List<FileInfo> files = new ArrayList<FileInfo>();
-                        files = fileAdapter.getCheckedFile(files);
-                        for (FileInfo info : files) {
-                            File file = new File(baseFile, info.getName());
-                            if (file.exists()) {
-                                try {
-                                    AsyncTask<Void, Void, String> smsTask = new SmsTaskRestore(getApplication(), file);
-                                    smsTask.execute();
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                    Log.w(TAG, e.toString());
-                                }
-                            }
-                        }
-                        Toast.makeText(MainActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
-                        loadData();
-                    }
-                })
-                .setNegativeButton("取消", null).create().show();
-    }
-
-    public void loadData() {
-        list.clear();
-        String[] strs = baseFile.list();
-        if (strs != null && strs.length > 0) {
-            Toast.makeText(this, "导入" + strs.length + "个文件！", Toast.LENGTH_SHORT).show();
-            for (String str : strs) {
-                list.add(0, new FileInfo(str, false));
-            }
-        }
-        fileAdapter.setData(list);
-        fileAdapter.notifyDataSetChanged();
+    public void notifyRestore(FileInfo info) {
+        ((RestoreFragment) restoreFragment).restore(info);
     }
 
     public void smsBackup(View view) {
@@ -273,7 +153,6 @@ public class MainActivity extends AppCompatActivity
             new SmsTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
-            Log.w(TAG, e.toString());
         }
     }
 
@@ -281,7 +160,6 @@ public class MainActivity extends AppCompatActivity
         try {
             new ContactTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
-            Log.w(TAG, e.toString());
             e.printStackTrace();
         }
     }
@@ -290,7 +168,6 @@ public class MainActivity extends AppCompatActivity
         try {
             new CallLogTask(this, Constants.defaultPath).execute();
         } catch (FileNotFoundException e) {
-            Log.w(TAG, e.toString());
             e.printStackTrace();
         }
     }
@@ -299,10 +176,14 @@ public class MainActivity extends AppCompatActivity
         smsBackup(view);
         contactBackup(view);
         callLog(view);
+        menuMultipleActions.toggle();
     }
 
     public void manualBackup(View view) {
-
+        if (munalBackupFragment == null)
+            munalBackupFragment = new ManualBackupFragment();
+        switchContent("手动备份", mFragment, munalBackupFragment);
+        menuMultipleActions.toggle();
     }
 
 }
