@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="bottom" android:orientation="vertical" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@color/white" android:padding="12.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="14.0sp" android:textColor="@color/teal" android:id="@id/progress_tv" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            <TextView android:textSize="14.0sp" android:textColor="@color/teal" android:id="@id/rate_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <mobi.infolife.appbackup.ui.image.AnimatingProgressBar android:id="@id/progress_pb" android:layout_width="fill_parent" android:layout_height="3.0dip" android:layout_marginTop="12.0dip" android:progressDrawable="@drawable/bottom_task_progress" style="?android:attr/progressBarStyleHorizontal" />
+        <LinearLayout android:orientation="horizontal" android:id="@id/layout_fail_detail" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:layout_marginBottom="5.0dip">
+            <TextView android:textSize="14.0dip" android:textColor="#ffff5871" android:id="@id/text_fail_statistics" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="70/100 Failed" android:layout_weight="1.0" android:layout_alignParentLeft="true" android:layout_alignWithParentIfMissing="true" />
+            <LinearLayout android:gravity="right" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="2.0">
+                <TextView android:textSize="12.0dip" android:textStyle="bold" android:textColor="#ffff5871" android:id="@id/text_fail_reason0" android:layout_width="wrap_content" android:layout_height="0.0dip" android:text="- reason1 reason1 reason1" android:maxLines="1" android:layout_weight="1.0" android:layout_alignParentRight="true" />
+                <TextView android:textSize="12.0dip" android:textStyle="bold" android:textColor="#ffff5871" android:id="@id/text_fail_reason1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="- reason2 reason2 reason2" android:maxLines="1" android:layout_alignParentRight="true" />
+            </LinearLayout>
+        </LinearLayout>
+        <ListView android:id="@id/list_fail_items" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="95.0dip" android:divider="@null" />
+        <TextView android:textSize="18.0sp" android:textColor="@color/complete_done_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/done_tv" android:background="@drawable/selector_color_primary_bound" android:layout_width="fill_parent" android:layout_height="38.0dip" android:layout_marginTop="8.0dip" android:text="@string/done" android:textAllCaps="false" />
+    </LinearLayout>
+</LinearLayout>

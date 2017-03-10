@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mobi.infolife.appbackup.ui.screen.transfer.common.ScanBackground android:id="@id/content" android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent" app:rb_color="@color/teal" app:rb_radius="30.0dip" app:rb_duration="4000" app:rb_rippleAmount="6" app:rb_scale="6.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:id="@id/headImgLayout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:id="@id/centerImage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:scaleType="center" />
+    </LinearLayout>
+    <ImageView android:id="@id/image_wait" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginTop="-80.0dip" android:src="@drawable/wait" android:layout_toLeftOf="@id/headImgLayout" android:layout_below="@id/headImgLayout" />
+    <TextView android:textSize="14.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:id="@id/deviceName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_below="@id/headImgLayout" />
+    <TextView android:textSize="14.0sp" android:textColor="@color/scan_tips" android:gravity="center_horizontal" android:id="@id/waitingLabel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="80.0dip" android:text="@string/waiting_for_sender" android:layout_alignParentBottom="true" />
+    <LinearLayout android:orientation="vertical" android:id="@id/layout_scan_recv_pop_retry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="center_horizontal" android:id="@id/no_receiver_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="@string/no_sender" />
+        <android.widget.TextView android:textSize="17.0sp" android:textColor="@color/white" android:gravity="center" android:id="@id/retry_btn" android:background="@drawable/bg_btn_package" android:layout_width="160.0dip" android:layout_height="38.0dip" android:layout_marginBottom="100.0dip" android:text="@string/retry" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    </LinearLayout>
+    <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/popwindow_scan_invite" />
+</mobi.infolife.appbackup.ui.screen.transfer.common.ScanBackground>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:paddingTop="20.0dip" android:paddingRight="16.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/iv_notification_icon" android:layout_centerVertical="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_syn" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="7.0dip" android:src="@drawable/ic_file_upload" android:layout_alignParentLeft="true" />
+    <TextView android:textSize="14.0dip" android:textColor="@color/black_70" android:gravity="center_vertical" android:id="@id/tv_syncing_title" android:layout_width="wrap_content" android:layout_height="24.0dip" android:text="title" android:maxLines="1" android:layout_toLeftOf="@id/iv_cancel" android:layout_toRightOf="@id/iv_syn" />
+    <ImageView android:id="@id/iv_cancel" android:paddingLeft="8.0dip" android:layout_width="40.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_close_black" android:layout_alignParentRight="true" />
+    <TextView android:textSize="14.0dip" android:textColor="@color/teal" android:gravity="center_vertical" android:id="@id/tv_synced_title" android:layout_width="wrap_content" android:layout_height="24.0dip" android:text="complete" android:maxLines="1" android:layout_toLeftOf="@id/iv_cancel" android:layout_alignParentLeft="true" />
+    <TextView android:textSize="14.0dip" android:textColor="@color/black_54" android:gravity="center_vertical" android:id="@id/tv_goto" android:layout_width="wrap_content" android:layout_height="24.0dip" android:src="@drawable/ic_close_black" android:text="cancel" android:layout_alignParentRight="true" />
+    <ProgressBar android:id="@id/progress_drive_item" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:max="100" android:progress="50" android:text="msg2" android:layout_below="@id/tv_syncing_title" style="@style/BrProgressBar_drive" />
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:background="@color/battleship_grey" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="69.0dip" android:layout_height="69.0dip" android:layout_marginTop="28.0dip" android:src="@drawable/br_icon" />
+        <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/white" android:id="@id/app_version_code" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" />
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/white_40" android:gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip" android:text="@string/about_right" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@color/slate" android:layout_width="fill_parent" android:layout_height="48.0dip" android:layout_marginTop="20.0dip">
+            <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/about_new" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:paddingLeft="30.0dip" android:paddingTop="16.0dip" android:paddingRight="30.0dip" android:paddingBottom="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/what_is_new_1" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/what_is_new_2" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/what_is_new_3" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/what_is_new_4" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/what_is_new_5" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:padding="4.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="-" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:paddingLeft="5.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@color/slate" android:layout_width="fill_parent" android:layout_height="48.0dip">
+            <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/about_dev" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:paddingTop="16.0dip" android:paddingBottom="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <android.widget.TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Android Engineering" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:id="@id/waston" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text=" Wastonboy / Jack / Alvin / Lily" />
+            <android.widget.TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="User Interface Designer" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:id="@id/eric" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text=" Eric-chen / Tiger-chang / Cissie" />
+            <android.widget.TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="Operation" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/white" android:id="@id/pinky" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text=" Lori / Pinky" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:background="@color/slate" android:layout_width="fill_parent" android:layout_height="48.0dip">
+            <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/white" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/about_translation" />
+        </LinearLayout>
+        <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/white" android:gravity="center_horizontal" android:id="@id/translate_tv" android:padding="10.0dip" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="182.0dip" />
+    </LinearLayout>
+</ScrollView>

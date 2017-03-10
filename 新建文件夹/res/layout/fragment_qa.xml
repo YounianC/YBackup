@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/battleship_grey" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.widget.TextView android:id="@id/qa_abr_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fragment_qa_abr" style="@style/qa_title_style" />
+    <View android:background="@color/gunmetal_two" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <android.widget.TextView android:id="@id/qa_send_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fragment_qa_send" style="@style/qa_title_style" />
+    <View android:background="@color/gunmetal_two" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <android.widget.TextView android:id="@id/qa_setting_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fragment_qa_setting" style="@style/qa_title_style" />
+    <View android:background="@color/gunmetal_two" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <android.widget.TextView android:id="@id/qa_feature_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/fragment_qa_feature" style="@style/qa_title_style" />
+    <View android:background="@color/gunmetal_two" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <View android:background="@color/battleship_grey" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+    <LinearLayout android:orientation="horizontal" android:id="@id/mail" android:background="@drawable/bg_feedback_mail" android:paddingLeft="31.0dip" android:paddingTop="16.0dip" android:paddingBottom="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginTop="100.0dip" android:layout_marginRight="16.0dip" android:layout_marginBottom="16.0dip">
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/mail" />
+        <View android:background="@color/white" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="13.0dip" />
+        <TextView android:textSize="17.0sp" android:textColor="@color/white" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="18.0dip" android:text="@string/feedback_mail" />
+    </LinearLayout>
+</LinearLayout>

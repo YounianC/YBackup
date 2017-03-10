@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:id="@id/switch_container_ll" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </ScrollView>
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <View android:background="@drawable/bg_bottom_opt_bar" android:layout_width="fill_parent" android:layout_height="2.0dip" />
+        <LinearLayout android:id="@id/switch_ll" android:background="@color/white" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="65.0dip">
+            <include layout="@layout/bottom_button_view" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/cv_pb" android:padding="12.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/txt_dark_green" android:gravity="left" android:id="@id/tv_pb_info" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <mobi.infolife.appbackup.ui.image.AnimatingProgressBar android:id="@id/pb_edit_path" android:layout_width="fill_parent" android:layout_height="3.0dip" android:layout_marginTop="12.0dip" android:progressDrawable="@drawable/storage_progressbar" style="?android:attr/progressBarStyleHorizontal" />
+    </LinearLayout>
+</RelativeLayout>

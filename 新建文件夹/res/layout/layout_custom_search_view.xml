@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:id="@id/search_layout" android:background="@color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="@color/teal" android:layout_width="fill_parent" android:layout_height="?actionBarSize" />
+    <View android:id="@id/search_mask" android:background="@color/black_40" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:gravity="center_vertical" android:background="@drawable/bg_custom_searchview" android:layout_width="fill_parent" android:layout_height="44.0dip" android:layout_marginLeft="8.0dip" android:layout_marginTop="6.0dip" android:layout_marginRight="8.0dip" android:layout_marginBottom="6.0dip">
+        <ImageView android:id="@id/search_cancel" android:padding="@dimen/search_img_padding" android:layout_width="@dimen/search_img_size" android:layout_height="@dimen/search_img_size" android:layout_marginLeft="8.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/ic_imported_black" android:scaleType="center" />
+        <EditText android:textSize="16.0sp" android:textColor="@color/greyish_brown_two" android:id="@id/search_edit" android:background="@color/transparent" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:hint="Search" android:singleLine="true" android:layout_weight="1.0" android:imeOptions="actionSearch" />
+        <ImageView android:id="@id/search_clear" android:padding="@dimen/search_img_padding" android:layout_width="40.0dip" android:layout_height="@dimen/search_img_size" android:layout_marginRight="8.0dip" android:src="@drawable/ic_close_black" android:scaleType="center" />
+    </LinearLayout>
+</FrameLayout>

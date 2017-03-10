@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:id="@id/layout_tabbar" android:background="@color/teal" android:layout_width="fill_parent" android:layout_height="48.0dip">
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <TextView android:textColor="@color/white" android:gravity="center" android:id="@id/tab1_tv" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+        </LinearLayout>
+        <TextView android:textColor="@color/white" android:gravity="center" android:id="@id/tab2_tv" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+        <TextView android:textColor="@color/white" android:gravity="center" android:id="@id/tab3_tv" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" />
+    </LinearLayout>
+    <View android:id="@id/index_line" android:background="@color/white" android:layout_width="60.0dip" android:layout_height="2.0dip" android:layout_marginTop="-2.0dip" />
+</merge>

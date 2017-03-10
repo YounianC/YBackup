@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/style_setting_item"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@id/item_checkbox">
+        <android.widget.TextView android:id="@id/item_title" android:layout_width="180.0dip" android:layout_height="wrap_content" android:text="@string/backup" style="@style/text_style_setting_line1" />
+        <android.widget.TextView android:id="@id/item_summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_line2_margintop_size" android:text="@string/backup_path" android:layout_below="@id/item_title" style="@style/text_style_setting_line2" />
+    </RelativeLayout>
+    <android.support.v7.widget.SwitchCompat android:id="@id/item_checkbox" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:layout_alignParentRight="true" />
+</RelativeLayout>

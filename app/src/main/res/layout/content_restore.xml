@@ -13,16 +13,30 @@
     tools:context="cn.net.younian.youbackup.MainActivity">
 
     <RelativeLayout
-        android:textSize="65sp"
         android:id="@+id/backup"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/activity_vertical_margin">
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:textSize="65sp">
+
+        <RelativeLayout
+            android:id="@+id/restore_info"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="100dp"
+                android:id="@+id/restore_info_contacts"
+                android:layout_height="match_parent"
+                android:text="123" />
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/restore_group1"
             android:layout_width="wrap_content"
-            android:layout_height="60dp">
+            android:layout_height="100dp"
+            android:layout_below="@id/restore_info">
 
             <CheckBox
                 android:id="@+id/restore_check_contacts"
@@ -38,14 +52,15 @@
                 android:id="@+id/restore_spinner_contacts"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@id/restore_check_contacts" />
+                android:layout_alignEnd="@id/restore_check_contacts"
+                android:layout_alignRight="@id/restore_check_contacts"
+                android:entries="@array/restore_type" />
         </RelativeLayout>
-
 
         <RelativeLayout
             android:id="@+id/restore_group2"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="100dp"
             android:layout_below="@id/restore_group1">
 
             <CheckBox
@@ -62,13 +77,15 @@
                 android:id="@+id/restore_spinner_sms"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@id/restore_check_sms" />
+                android:layout_alignEnd="@id/restore_check_sms"
+                android:layout_alignRight="@id/restore_check_sms"
+                android:entries="@array/restore_type" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/restore_group3"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"
+            android:layout_height="100dp"
             android:layout_below="@id/restore_group2">
 
             <CheckBox
@@ -85,7 +102,33 @@
                 android:id="@+id/restore_spinner_log"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_alignRight="@id/restore_check_log" />
+                android:layout_alignEnd="@id/restore_check_log"
+                android:layout_alignRight="@id/restore_check_log"
+                android:entries="@array/restore_type" />
         </RelativeLayout>
+
+        <Button
+            android:id="@+id/bt_restore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:text="还原" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:id="@+id/restore_info_sms"
+            android:layout_height="match_parent"
+            android:text="456"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/restore_info_calllog"
+            android:layout_toEndOf="@+id/restore_info_calllog" />
+
+        <TextView
+            android:layout_width="100dp"
+            android:id="@+id/restore_info_calllog"
+            android:layout_height="match_parent"
+            android:text="789"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

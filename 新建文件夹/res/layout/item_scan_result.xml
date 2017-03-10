@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/pale_grey" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:paddingLeft="21.0dip" android:paddingTop="10.0dip" android:paddingRight="12.0dip" android:paddingBottom="10.0dip" android:layout_width="fill_parent" android:layout_height="76.0dip">
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_virus_icon" android:layout_width="49.0dip" android:layout_height="49.0dip" android:src="@drawable/apk_img" android:contentDescription="virus_icon" />
+        <LinearLayout android:orientation="vertical" android:paddingLeft="21.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <android.widget.TextView android:textColor="@color/battleship_grey" android:ellipsize="end" android:gravity="center|left" android:id="@id/tv_app_name" android:paddingRight="5.0dip" android:layout_width="wrap_content" android:layout_height="0.0dip" android:singleLine="true" android:layout_weight="1.0" />
+            <android.widget.TextView android:textStyle="bold" android:textColor="@color/coral_pink" android:ellipsize="end" android:gravity="center|left" android:id="@id/tv_virus_cat" android:layout_width="wrap_content" android:layout_height="0.0dip" android:singleLine="true" android:drawableRight="@drawable/triangle_mark_down" android:layout_weight="1.0" />
+        </LinearLayout>
+        <android.widget.TextView android:textColor="@color/white" android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/tv_uninstall" android:background="@drawable/selector_color_primary_green" android:layout_width="90.0dip" android:layout_height="36.0dip" android:text="@string/uninstall" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_virus_detail" android:paddingLeft="91.0dip" android:paddingRight="12.0dip" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/coral_pink" android:gravity="center|left" android:id="@id/tv_virus_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" />
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="center|left" android:id="@id/tv_malicious_behavior" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" android:text="@string/malicious_behavior" />
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="center|left" android:id="@id/tv_mb_detail" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" />
+    </LinearLayout>
+    <View android:id="@id/v_divider" android:background="@color/bluey_grey_two" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" />
+</LinearLayout>

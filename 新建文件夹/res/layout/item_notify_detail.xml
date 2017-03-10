@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="56.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:background="@color/grey_seven" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="27.0dip" android:layout_marginRight="19.0dip" />
+    <RelativeLayout android:id="@id/detail_rl" android:background="@drawable/bg_only_one_notify" android:paddingLeft="10.0dip" android:paddingRight="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginRight="10.0dip">
+        <ImageView android:id="@id/item_iv" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_centerVertical="true" />
+        <android.widget.TextView android:enabled="true" android:textSize="12.0sp" android:textStyle="bold" android:textColor="@color/btn_notify_text_color" android:gravity="center" android:id="@id/opt_tv" android:paddingLeft="11.0dip" android:paddingRight="11.0dip" android:layout_width="wrap_content" android:layout_height="21.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="8.0dip" android:layout_marginRight="10.0dip" android:layout_toLeftOf="@id/opt_tv" android:layout_toRightOf="@id/item_iv" android:layout_centerVertical="true">
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/text_color_notification" android:id="@id/item_title_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:lineSpacingExtra="3.0dip" />
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/text_color_notification" android:id="@id/item_detail_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:lineSpacingExtra="3.0dip" />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

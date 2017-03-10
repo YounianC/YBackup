@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/update_abr" android:background="@drawable/bg_update_new_version_for_unsupport_file" android:layout_width="fill_parent" android:layout_height="66.0dip" android:layout_marginTop="15.0dip" android:layout_marginBottom="35.0dip" android:layout_below="@id/sending_files_list"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/fileIcon" android:layout_width="0.0dip" android:layout_height="40.0dip" android:src="@drawable/br_icon" android:scaleType="centerInside" android:layout_weight="58.0" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="270.0">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="left" android:id="@id/unsupportFileTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:text="@string/show_unsupport_files" android:maxLines="1" />
+        <android.widget.TextView android:textSize="12.0sp" android:textStyle="bold" android:textColor="@color/teal" android:id="@id/unsupportFileContent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:text="@string/sender_update_abr_content" android:maxLines="1" />
+    </LinearLayout>
+</LinearLayout>

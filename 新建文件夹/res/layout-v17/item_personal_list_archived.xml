@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/ll_apk_item" android:background="@color/white_seven" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/bg_white_shadow" android:layout_width="0.0dip" android:layout_height="109.0dip" android:layout_marginTop="15.0dip" android:layout_weight="12.0">
+        <RelativeLayout android:gravity="center" android:padding="16.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@id/iv_edit_name" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:src="@drawable/icon_edit_name" android:scaleType="centerInside" android:layout_alignBottom="@id/iv_personal_file_name" android:layout_alignParentRight="true" />
+            <android.widget.TextView android:textSize="12.0dip" android:textColor="@color/black_54" android:id="@id/iv_personal_file_detail" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="3.0dip" android:text="2016.05.06 - 2MB" android:maxLines="1" android:layout_below="@id/iv_personal_file_name" android:layout_alignParentLeft="true" />
+            <android.widget.TextView android:textSize="12.0dip" android:textColor="@color/black_54" android:gravity="right" android:id="@id/iv_personal_device" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:layout_marginTop="3.0dip" android:layout_marginRight="10.0dip" android:text="archived 1 2016.05.06 - 2MB" android:maxLines="1" android:layout_toRightOf="@id/iv_personal_file_detail" android:layout_below="@id/iv_personal_file_name" android:layout_alignParentRight="true" />
+            <android.widget.TextView android:textSize="14.0dip" android:textColor="@color/black_80" android:ellipsize="middle" android:id="@id/iv_personal_file_name" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="archived 1" android:maxLines="1" android:singleLine="true" android:layout_toLeftOf="@id/iv_edit_name" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_alignParentStart="true" />
+        </RelativeLayout>
+        <View android:id="@id/iv_diver" android:background="@color/black_20" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="2.0dip" android:layout_marginRight="2.0dip" />
+        <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/layout_contacts_item" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/iv_item_contact" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_contacts_black" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_gravity="center_vertical" android:id="@id/tv_contacts_item_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="120" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/layout_calls_item" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/iv_item_call" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_calls_balck" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_gravity="center_vertical" android:id="@id/tv_calls_item_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="120" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_horizontal" android:orientation="horizontal" android:id="@id/layout_sms_item" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                <ImageView android:id="@id/iv_item_sms" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_sms_black" />
+                <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_gravity="center_vertical" android:id="@id/tv_sms_item_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5.0dip" android:text="120" />
+            </LinearLayout>
+        </LinearLayout>
+        <ImageView android:id="@id/new_iv" android:layout_width="25.0dip" android:layout_height="11.0dip" android:layout_marginTop="-109.0dip" android:src="@drawable/group_14" />
+    </LinearLayout>
+    <android.support.v7.widget.AppCompatCheckBox android:layout_gravity="center_vertical" android:id="@id/checkbox" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:button="@null" android:drawableLeft="@drawable/check_box_green" android:layout_weight="1.0" />
+</LinearLayout>

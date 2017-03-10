@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:paddingLeft="@dimen/apkinfo_detail_info_padding_left" android:paddingTop="@dimen/apkinfo_detail_info_padding_top" android:paddingRight="@dimen/apkinfo_detail_info_padding_right" android:paddingBottom="@dimen/apkinfo_detail_info_padding_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:layout_gravity="center_horizontal" android:id="@id/item_icon" android:layout_width="@dimen/apkinfo_detail_tapk_icon_size" android:layout_height="@dimen/apkinfo_detail_tapk_icon_size" android:src="@drawable/apk_img" />
+            <android.widget.TextView android:textSize="14.0dip" android:textColor="@color/black_87" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/item_appname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/app_name" android:maxLines="3" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/bluegreen_3" android:gravity="center" android:layout_gravity="center_horizontal" android:id="@id/tv_apk_installed" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/installed" android:singleLine="true" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/black_54" android:id="@id/item_versionname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="v4.3.2" android:maxLines="1" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/black_54" android:id="@id/item_size" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/size" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/black_54" android:id="@id/item_date" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/date" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/black_54" android:id="@id/item_pkgname" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="11.0dip" android:text="@string/pkg_name" />
+            <android.widget.TextView android:textSize="@dimen/apkinfo_detail_info_textsize" android:textColor="@color/black_54" android:id="@id/item_file_path" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/pkg_name" />
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout android:orientation="horizontal" android:id="@id/layout_set_autobackup2" android:background="@drawable/bg_dialog_apk_detail_item" android:paddingLeft="@dimen/apkinfo_detail_info_padding_left" android:paddingRight="@dimen/apkinfo_detail_info_padding_right" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height">
+        <TextView android:textSize="@dimen/apkinfo_detail_button_textsize" android:textColor="@color/black_70" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/set_as_auto_backup" android:layout_toLeftOf="@id/cb_apk_item" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+        <android.support.v7.widget.AppCompatCheckBox android:layout_gravity="center_vertical" android:id="@id/cb_apk_item" android:layout_width="24.0dip" android:layout_height="24.0dip" android:button="@null" android:drawableLeft="@drawable/check_box_green" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/item_layout_installed_app_opt" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:id="@id/item_btn_launch" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/launch" style="@style/style_apk_detail_btn" />
+        <TextView android:id="@id/item_btn_app_info" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/app_info" style="@style/style_apk_detail_btn" />
+        <TextView android:id="@id/item_btn_search_app" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/search_app" style="@style/style_apk_detail_btn" />
+        <TextView android:id="@id/item_btn_uninstall_app" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/uninstall" style="@style/style_apk_detail_btn" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/item_layout_packages_opt" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:id="@id/item_btn_install" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/install" style="@style/style_apk_detail_btn" />
+        <TextView android:id="@id/item_btn_search_app2" android:layout_width="fill_parent" android:layout_height="@dimen/apkinfo_detail_button_height" android:text="@string/search_app" style="@style/style_apk_detail_btn" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center|right" android:orientation="vertical" android:paddingLeft="@dimen/apkinfo_detail_info_padding_left" android:paddingRight="14.0dip" android:layout_width="fill_parent" android:layout_height="48.0dip">
+        <TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/teal" android:id="@id/cancel_tv" android:background="@drawable/bg_dialog_apk_detail_item" android:padding="10.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" />
+    </LinearLayout>
+</LinearLayout>

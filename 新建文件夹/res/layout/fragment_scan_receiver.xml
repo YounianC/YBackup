@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mobi.infolife.appbackup.ui.screen.transfer.common.ScanBackground android:id="@id/content" android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent" app:rb_color="@color/teal" app:rb_radius="30.0dip" app:rb_duration="4000" app:rb_rippleAmount="6" app:rb_scale="6.0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:id="@id/update_abr" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="15.0dip" android:layout_marginTop="7.0dip" android:layout_alignParentTop="true">
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="58.0">
+            <android.support.v7.widget.AppCompatCheckBox android:id="@id/item_checkbox_update" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:checked="true" android:button="@drawable/icon_sender_update" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="270.0">
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/new_bluegreen_two" android:gravity="left" android:id="@id/unsupportFileTitle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:text="@string/sender_scan_update_title" android:singleLine="true" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/teal" android:id="@id/unsupportFileContent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:text="@string/sender_scan_update_msg" android:singleLine="true" android:layout_toRightOf="@id/fileLabelName" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center" android:id="@id/headImgLayout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true">
+        <ImageView android:id="@id/centerImage" android:layout_width="62.0dip" android:layout_height="62.0dip" android:scaleType="center" />
+    </LinearLayout>
+    <ImageView android:id="@id/image_wait" android:layout_width="40.0dip" android:layout_height="40.0dip" android:layout_marginTop="-80.0dip" android:src="@drawable/wait" android:layout_toLeftOf="@id/headImgLayout" android:layout_below="@id/headImgLayout" />
+    <TextView android:textSize="14.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:id="@id/deviceName" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_below="@id/headImgLayout" />
+    <RelativeLayout android:gravity="center_horizontal" android:id="@id/foundDeviceLayout1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/rippleRadius" android:layout_above="@id/headImgLayout" android:layout_centerHorizontal="true">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon1" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" android:scaleType="center" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/deviceName1" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <RelativeLayout android:id="@id/foundDeviceLayout2" android:paddingLeft="@dimen/rippleRadius" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/headImgLayout" android:layout_above="@id/headImgLayout">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon2" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" android:scaleType="center" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/deviceName2" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <RelativeLayout android:orientation="vertical" android:id="@id/foundDeviceLayout3" android:paddingLeft="@dimen/rippleRadius" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/headImgLayout" android:layout_below="@id/headImgLayout">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon3" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" android:scaleType="center" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/deviceName3" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon3" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <RelativeLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/foundDeviceLayout4" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/rippleRadius" android:layout_below="@id/headImgLayout" android:layout_centerHorizontal="true">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon4" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" android:scaleType="center" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:layout_gravity="center_horizontal" android:id="@id/deviceName4" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon4" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <RelativeLayout android:orientation="vertical" android:id="@id/foundDeviceLayout5" android:paddingRight="@dimen/rippleRadius" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/headImgLayout" android:layout_below="@id/headImgLayout">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon5" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" android:scaleType="center" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:id="@id/deviceName5" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon5" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <RelativeLayout android:orientation="vertical" android:id="@id/foundDeviceLayout6" android:paddingRight="@dimen/rippleRadius" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toLeftOf="@id/headImgLayout" android:layout_above="@id/headImgLayout" android:layout_alignBottom="@id/deviceIconLayout2">
+        <LinearLayout android:orientation="vertical" android:layout_width="@dimen/scanHeadWidth" android:layout_height="wrap_content">
+            <ImageView android:id="@id/deviceIcon6" android:layout_width="@dimen/scanHeadWidth" android:layout_height="@dimen/scanHeadWidth" />
+            <TextView android:textSize="12.0sp" android:textColor="@color/black_two" android:gravity="center_horizontal" android:id="@id/deviceName6" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        </LinearLayout>
+        <ImageView android:id="@id/waiting_icon6" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/rotation_head_icon" />
+    </RelativeLayout>
+    <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/scan_tips" android:gravity="center_horizontal" android:id="@id/waitingLabel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="80.0dip" android:text="@string/waiting_for_receiver" android:layout_alignParentBottom="true" />
+    <LinearLayout android:orientation="vertical" android:id="@id/layout_scan_recv_pop_retry" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="center_horizontal" android:id="@id/no_receiver_tv" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:text="@string/no_receiver" />
+        <android.widget.TextView android:textSize="17.0sp" android:textColor="@color/white" android:gravity="center" android:id="@id/retry_btn" android:background="@drawable/bg_btn_package" android:layout_width="160.0dip" android:layout_height="38.0dip" android:layout_marginBottom="100.0dip" android:text="@string/retry" android:layout_alignParentBottom="true" android:layout_centerHorizontal="true" />
+    </LinearLayout>
+    <include android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" layout="@layout/popwindow_scan_invite" />
+</mobi.infolife.appbackup.ui.screen.transfer.common.ScanBackground>

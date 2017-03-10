@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/ll_not_conn" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ImageView android:layout_width="108.0dip" android:layout_height="108.0dip" android:layout_marginTop="119.0dip" android:src="@drawable/drive_not_conn" />
+        <android.widget.TextView android:textSize="16.0dip" android:textColor="@color/pinkish_grey_four" android:paddingLeft="37.0dip" android:paddingRight="37.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="@string/unable_to_conn" />
+        <android.widget.Button android:textSize="15.0sp" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_retry" android:background="@drawable/bg_btn_bottom_opt" android:layout_width="140.0dip" android:layout_height="43.0dip" android:layout_marginTop="15.0dip" android:text="@string/retry" android:textAllCaps="false" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:id="@id/ll_connecting" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <ProgressBar android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_marginTop="139.0dip" android:indeterminateDrawable="@drawable/round_progress" />
+        <android.widget.TextView android:textSize="16.0dip" android:textColor="@color/pinkish_grey" android:id="@id/tv_waiting" android:paddingLeft="37.0dip" android:paddingRight="37.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="@string/connecting_drive" />
+    </LinearLayout>
+</RelativeLayout>

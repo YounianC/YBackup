@@ -1,7 +1,10 @@
 package cn.net.younian.youbackup;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -13,19 +16,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
-import java.io.FileNotFoundException;
-
-import cn.net.younian.youbackup.asynctask.CallLogTask;
-import cn.net.younian.youbackup.asynctask.ContactTask;
-import cn.net.younian.youbackup.asynctask.SmsTask;
 import cn.net.younian.youbackup.entity.FileInfo;
+import cn.net.younian.youbackup.handler.BackupHandler;
 import cn.net.younian.youbackup.util.Constants;
 
 
@@ -43,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
     private FloatingActionsMenu menuMultipleActions;
     private Menu menu;
+    private BackupHandler backupHandler;
 
     private long firstBackPressedTime = 0;
 
@@ -68,6 +67,8 @@ public class MainActivity extends AppCompatActivity
         ft.add(R.id.fragment_container, mainFragment).show(mainFragment).commit();
 
         menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        backupHandler = new BackupHandler(this);
+        autoCheckBackup();
     }
 
     @Override
@@ -147,8 +148,10 @@ public class MainActivity extends AppCompatActivity
 
             if (!mFragment.getClass().getName().endsWith("MainFragment")) {
                 this.menu.getItem(0).setVisible(false);
+                menuMultipleActions.setVisibility(View.GONE);
             } else {
                 this.menu.getItem(0).setVisible(true);
+                menuMultipleActions.setVisibility(View.VISIBLE);
             }
 
             FragmentTransaction ft = fm.beginTransaction();
@@ -176,35 +179,15 @@ public class MainActivity extends AppCompatActivity
         switchContent("还原 - " + info.getName(), mFragment, restoreFragment);
     }
 
-    public void smsBackup(View view) {
-        try {
-            new SmsTask(this, Constants.defaultPath).execute();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public void autoCheckBackup() {
+        SharedPreferences sp = this.getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
+        if (sp.getBoolean(Constants.Setting_AutoBackup, false)) {
+            Toast.makeText(this, "===自动备份开始==", Toast.LENGTH_SHORT).show();
+            Message msg = new Message();
+            Bundle b = new Bundle();// 存放数据
+            b.putString("color", "我的");
+            backupHandler.sendMessage(msg);
         }
-    }
-
-    public void contactBackup(View view) {
-        try {
-            new ContactTask(this, Constants.defaultPath).execute();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void callLog(View v) {
-        try {
-            new CallLogTask(this, Constants.defaultPath).execute();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void quickBackup(View view) {
-        smsBackup(view);
-        contactBackup(view);
-        callLog(view);
-        menuMultipleActions.toggle();
     }
 
     public void manualBackup(View view) {
@@ -214,4 +197,10 @@ public class MainActivity extends AppCompatActivity
         menuMultipleActions.toggle();
     }
 
+    public void quickBackup(View view) {
+        Message msg = new Message();
+        Bundle b = new Bundle();// 存放数据
+        b.putString("color", "我的");
+        backupHandler.sendMessage(msg);
+    }
 }

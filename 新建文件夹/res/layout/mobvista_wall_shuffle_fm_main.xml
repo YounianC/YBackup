@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/rl_MainRlayout" android:background="@color/mobvista_white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_content" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/rl_top_big" android:layout_width="fill_parent" android:layout_height="180.0dip">
+            <ImageView android:id="@id/iv_campaign_big" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+            <RelativeLayout android:id="@id/rl_mark" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+            <ImageView android:id="@id/iv_close" android:layout_width="25.0dip" android:layout_height="25.0dip" android:layout_margin="10.0dip" android:src="@drawable/mobvista_wall_shuffle_close" android:scaleType="fitCenter" android:layout_alignParentRight="true" />
+        </RelativeLayout>
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:background="@drawable/mobvista_wall_shuffle_center_bg" android:paddingLeft="23.0dip" android:paddingRight="23.0dip" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <RelativeLayout android:background="@drawable/mobvista_wall_shuffle_round_shape" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20.0dip" android:layout_marginBottom="20.0dip">
+                <ImageView android:id="@id/iv_campaign_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerInParent="true" />
+            </RelativeLayout>
+            <TextView android:textSize="21.0sp" android:textColor="#ff282828" android:gravity="center" android:id="@id/tv_app_name" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <LinearLayout android:orientation="horizontal" android:id="@id/ll_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginBottom="5.0dip" />
+            <TextView android:textSize="18.0sp" android:textColor="#ff5f5f5f" android:ellipsize="end" android:gravity="center" android:id="@id/tv_dest" android:layout_width="fill_parent" android:layout_height="wrap_content" android:lines="2" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:background="#fff1f1f1" android:paddingLeft="24.0dip" android:paddingTop="18.0dip" android:paddingRight="24.0dip" android:paddingBottom="18.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="20.0sp" android:textColor="#ff282828" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Install Now?" />
+            <Button android:textSize="20.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/tv_install" android:background="@drawable/mobvista_wall_shuffle_shape_btn" android:layout_width="fill_parent" android:layout_height="48.0dip" android:layout_marginTop="12.0dip" android:layout_marginBottom="20.0dip" android:text="Yes" />
+            <RelativeLayout android:id="@id/rl_refurbish" android:background="@drawable/mobvista_wall_shuffle_flush_btn" android:layout_width="fill_parent" android:layout_height="48.0dip">
+                <ImageView android:layout_width="30.0dip" android:layout_height="30.0dip" android:src="@drawable/mobvista_wall_shuffle_refurbish" android:scaleType="fitCenter" android:layout_centerInParent="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

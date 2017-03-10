@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/style_setting_item"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="vertical" android:id="@id/layout_line1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_toLeftOf="@id/item_btn_checkupdate" android:layout_alignParentLeft="true" android:layout_centerVertical="true">
+        <android.widget.TextView android:id="@id/item_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/backup_path" android:layout_alignParentLeft="true" style="@style/text_style_setting_line1" />
+        <android.widget.TextView android:id="@id/item_summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_line2_margintop_size" android:text="@string/backup_path" android:layout_below="@id/item_title" android:layout_alignParentLeft="true" style="@style/text_style_setting_line2" />
+    </RelativeLayout>
+    <android.widget.TextView android:id="@id/item_btn_checkupdate" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/check" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:textAllCaps="false" style="@style/style_setting_btn_set" />
+</RelativeLayout>

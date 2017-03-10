@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/ll_adUnit" android:layout_width="fill_parent" android:layout_height="94.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/ll_ad_body" android:background="#ffffffff" android:layout_width="fill_parent" android:layout_height="94.0dip">
+        <LinearLayout android:id="@id/ll_facebook_mv" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <com.facebook.ads.MediaView android:gravity="center" android:id="@id/mv_nativeAdMedia" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/app_name" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/ll_ad_content" android:background="@color/black_80" android:padding="4.0dip" android:layout_width="fill_parent" android:layout_height="35.0dip" android:layout_alignParentBottom="true">
+            <TextView android:textSize="12.0sp" android:textColor="@android:color/white" android:ellipsize="end" android:gravity="center" android:id="@id/tv_nativeAdTitle" android:layout_width="0.0dip" android:layout_height="fill_parent" android:singleLine="true" android:layout_weight="5.0" />
+            <Button android:textSize="13.0sp" android:textColor="#ffffffff" android:gravity="center" android:id="@id/button_nativeAdCallToAction" android:background="@drawable/shape_ad_card" android:layout_width="0.0dip" android:layout_height="fill_parent" android:singleLine="true" android:layout_weight="2.0" />
+        </LinearLayout>
+        <LinearLayout android:gravity="right" android:orientation="horizontal" android:id="@id/ll_ad_label" android:background="@color/black_80" android:paddingRight="8.0dip" android:layout_width="60.0dip" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+    </RelativeLayout>
+</RelativeLayout>

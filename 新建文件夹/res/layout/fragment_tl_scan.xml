@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_recommend_tl" android:background="@color/dark_grey_blue" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="174.0dip">
+        <android.widget.TextView android:textSize="14.0dip" android:textColor="@color/white" android:gravity="center" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="13.0dip" android:text="@string/provided_by" android:maxLines="2" />
+        <android.widget.TextView android:textSize="14.0dip" android:textStyle="bold" android:textColor="@color/white" android:gravity="center" android:paddingLeft="5.0dip" android:paddingRight="5.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/tms" android:maxLines="2" />
+        <android.widget.TextView android:layout_gravity="center_horizontal" android:background="@drawable/tl_scan" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="22.0dip" android:layout_marginBottom="22.0dip" />
+        <android.widget.TextView android:textSize="16.0dip" android:textColor="@color/white" android:gravity="center" android:id="@id/tv_get_more" android:background="@drawable/selector_color_primary_green" android:layout_width="fill_parent" android:layout_height="41.0dip" android:layout_marginLeft="47.0dip" android:layout_marginRight="47.0dip" android:layout_marginBottom="14.0dip" android:text="@string/get_more" />
+    </LinearLayout>
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/ll_scan" android:layout_width="fill_parent" android:layout_height="312.0dip">
+        <RelativeLayout android:layout_gravity="center_horizontal" android:id="@id/rl_spin" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10.0dip">
+            <ImageView android:background="@color/transparent" android:layout_width="162.0dip" android:layout_height="162.0dip" android:src="@drawable/pb_bg" android:scaleType="centerInside" android:layout_centerInParent="true" />
+            <mobi.infolife.appbackup.ui.image.AnimatingProgressBar android:id="@id/pb_scan" android:layout_width="242.0dip" android:layout_height="242.0dip" android:max="100" android:progress="50" android:progressDrawable="@drawable/bg_pb_scan" android:rotation="-90.0" style="?android:attr/progressBarStyleHorizontal" />
+            <android.widget.TextView android:textSize="50.0sp" android:textColor="@color/teal" android:gravity="center" android:id="@id/tv_percent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="99" android:drawableRight="@drawable/percentage_lit" android:layout_centerInParent="true" />
+        </RelativeLayout>
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/scan_green" android:ellipsize="middle" android:gravity="center" android:id="@id/tv_scanning" android:paddingLeft="20.0dip" android:paddingRight="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="scanning complete" android:singleLine="true" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_virus" android:background="@color/pale_grey" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <android.support.v7.widget.RecyclerView android:id="@id/rv_virus" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_no_virus" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="43.0dip" android:layout_marginBottom="15.0dip" android:src="@drawable/scan_no_virus" />
+        <android.widget.TextView android:textSize="18.0sp" android:textColor="@color/teal" android:gravity="center" android:paddingLeft="20.0dip" android:paddingRight="20.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/no_virus" />
+        <View android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+        <android.widget.TextView android:textSize="18.0sp" android:textColor="@color/teal" android:gravity="center" android:id="@id/tv_no_virus_done" android:background="@drawable/selector_color_primary_bound" android:layout_width="fill_parent" android:layout_height="32.0dip" android:layout_marginLeft="40.0dip" android:layout_marginRight="40.0dip" android:layout_marginBottom="15.0dip" android:text="@string/done" />
+    </LinearLayout>
+</LinearLayout>

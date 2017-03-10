@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/style_setting_item"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.widget.TextView android:id="@id/tv_acc" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="" android:layout_alignParentLeft="true" style="@style/text_style_setting_line1" />
+    <android.widget.TextView android:id="@id/btn_logout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/log_out" android:layout_alignParentRight="true" style="@style/style_setting_btn_set" />
+</RelativeLayout>

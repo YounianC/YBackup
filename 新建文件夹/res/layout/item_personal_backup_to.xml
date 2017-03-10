@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="horizontal" android:id="@id/ll_personal_item" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="63.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="vertical" android:id="@id/ll_verbal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_centerVertical="true">
+        <android.widget.TextView android:textSize="18.0sp" android:textColor="@color/black_54" android:ellipsize="middle" android:gravity="bottom|center|left" android:id="@id/tv_personal_file_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:text="Archived1" android:maxLines="1" />
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/battleship_grey" android:ellipsize="middle" android:gravity="center|left|top" android:id="@id/tv_personal_file_detail" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:text="2016.10.17-2MB" android:maxLines="1" />
+    </LinearLayout>
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_personal_dot" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_radio_button_on" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+</RelativeLayout>

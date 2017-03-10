@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:id="@id/send_files_header" android:background="@color/white" android:paddingRight="19.0dip" android:layout_width="fill_parent" android:layout_height="79.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:gravity="center" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="58.0">
+            <ImageView android:id="@id/fileIcon" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/br_icon" android:scaleType="centerInside" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="270.0">
+            <RelativeLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/battleship_grey" android:gravity="left" android:id="@id/fileLabelName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="2.0dip" android:singleLine="true" />
+                <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/battleship_grey" android:id="@id/unsupportFileText" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:text="@string/file_unpported" android:singleLine="true" android:layout_toRightOf="@id/fileLabelName" android:layout_alignBottom="@id/fileLabelName" />
+                <android.widget.TextView android:textSize="13.0sp" android:textColor="@color/battleship_grey" android:gravity="right" android:id="@id/cancelBtn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/cancel" android:singleLine="true" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+                <android.widget.TextView android:textSize="12.0sp" android:textColor="#ff555555" android:gravity="left" android:id="@id/singleFileStatus" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:layout_marginBottom="5.0dip" android:singleLine="true" android:layout_below="@id/fileLabelName" />
+                <android.widget.TextView android:textSize="12.0sp" android:textColor="#ff555555" android:gravity="right" android:id="@id/singleProgressPercent" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:layout_alignBaseline="@id/singleFileStatus" />
+            </RelativeLayout>
+            <ProgressBar android:id="@id/singleFileProgress" android:layout_width="fill_parent" android:layout_height="3.0dip" android:progressDrawable="@drawable/bottom_task_progress" android:layout_centerVertical="true" style="?android:attr/progressBarStyleHorizontal" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:background="@color/battleship_grey" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.widget.TextView android:id="@id/qa_item_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/abr_qa_title_1" style="@style/qa_detail_title_style" />
+    <View android:background="@color/gunmetal_two" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    <android.widget.TextView android:id="@id/qa_item_content" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/abr_qa_content_1" style="@style/qa_detail_content_style" />
+</LinearLayout>

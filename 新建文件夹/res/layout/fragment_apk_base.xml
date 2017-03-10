@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/recycler_view_left" android:background="@color/white_seven" android:layout_width="16.0dip" android:layout_height="fill_parent" android:layout_alignParentLeft="true" />
+    <android.support.v7.widget.RecyclerView android:id="@id/recycler_view" android:background="@color/white_seven" android:paddingBottom="@dimen/bottom_bar_min_height" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_toLeftOf="@id/recycler_view_right" android:layout_toRightOf="@id/recycler_view_left" android:layout_centerHorizontal="true" android:layout_alignWithParentIfMissing="true" />
+    <View android:id="@id/recycler_view_right" android:background="@color/white_seven" android:layout_width="16.0dip" android:layout_height="fill_parent" android:layout_alignParentRight="true" />
+</RelativeLayout>

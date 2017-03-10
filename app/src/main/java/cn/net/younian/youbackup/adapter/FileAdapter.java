@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.net.younian.youbackup.MainActivity;
-import cn.net.younian.youbackup.MainFragment;
 import cn.net.younian.youbackup.R;
 import cn.net.younian.youbackup.entity.FileInfo;
 
@@ -86,6 +85,9 @@ public class FileAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.cb_file = (CheckBox) convertView.findViewById(R.id.cb_file);
             holder.file_name = (TextView) convertView.findViewById(R.id.file_name);
+            holder.info_count_contacts = (TextView) convertView.findViewById(R.id.item_info_contacts);
+            holder.info_count_sms = (TextView) convertView.findViewById(R.id.item_info_sms);
+            holder.info_count_calllog = (TextView) convertView.findViewById(R.id.item_info_calllog);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -93,6 +95,9 @@ public class FileAdapter extends BaseAdapter {
 
         final FileInfo info = data.get(position);
         holder.file_name.setText(info.getName());
+        holder.info_count_contacts.setText("" + info.getCountContacts());
+        holder.info_count_sms.setText("" + info.getCountSMS());
+        holder.info_count_calllog.setText("" + info.getCountCallLog());
         holder.file_name.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -115,6 +120,10 @@ public class FileAdapter extends BaseAdapter {
     private class ViewHolder {
         public CheckBox cb_file;
         public TextView file_name;
+
+        public TextView info_count_contacts;
+        public TextView info_count_sms;
+        public TextView info_count_calllog;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

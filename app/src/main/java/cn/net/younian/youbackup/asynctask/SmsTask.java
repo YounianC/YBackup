@@ -49,7 +49,7 @@ public class SmsTask extends AsyncTask<Void, Void, String> {
         if (!file.exists()) {
             file.mkdirs();
         }
-        File xmlFile = new File(file, "sms" + Constants.formatTime.format(new Date()) + ".xml");
+        File xmlFile = new File(file, Constants.File_SMS);
         pbarDialog = new ProgressDialog(context);
         pbarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pbarDialog.setMessage("短信备份中...");

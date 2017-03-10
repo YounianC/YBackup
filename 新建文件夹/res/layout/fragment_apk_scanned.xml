@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/layout_frame_scan" android:layout_width="fill_parent" android:layout_height="40.0dip">
+        <RelativeLayout android:id="@id/layout_scanning" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="40.0dip">
+            <TextView android:textSize="11.0dip" android:textColor="@color/battleship_grey" android:ellipsize="start" android:id="@id/tv_scan_path" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginRight="6.0dip" android:text="／SD Card／Android／storage/emssdsdsdsdulated/Android System" android:singleLine="true" android:layout_toLeftOf="@id/img_scan_close" android:layout_alignParentLeft="true" android:layout_centerVertical="true" />
+            <ImageView android:id="@id/img_scan_close" android:padding="8.0dip" android:layout_width="40.0dip" android:layout_height="40.0dip" android:src="@drawable/ic_close_black" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        </RelativeLayout>
+        <TextView android:textSize="14.0sp" android:textColor="@color/battleship_grey" android:gravity="center" android:layout_gravity="center" android:id="@id/view_scan_remind" android:layout_width="wrap_content" android:layout_height="40.0dip" android:text="@string/pull_down_scan" android:drawableRight="@drawable/icon_pull_refresh_small" android:drawablePadding="5.0dip" />
+    </FrameLayout>
+    <android.support.v4.widget.SwipeRefreshLayout android:id="@id/swipe_refresh_layout" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_below="@id/layout_frame_scan"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <android.support.v7.widget.RecyclerView android:id="@id/recycler_view" android:paddingBottom="65.0dip" android:scrollbars="none" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="@null" />
+        </FrameLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <TextView android:textSize="14.0sp" android:gravity="center" android:layout_gravity="center" android:id="@id/view_recycle_empty" android:paddingLeft="20.0dip" android:paddingRight="20.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/pull_down_scan_detail" android:drawableTop="@drawable/icon_pull_refresh_big" android:drawablePadding="9.0dip" android:layout_centerInParent="true" />
+    <android.widget.TextView android:textSize="16.0sp" android:textColor="@color/battleship_grey" android:id="@id/no_result_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="70.0dip" android:text="@string/no_result" android:layout_alignTop="@id/swipe_refresh_layout" android:layout_centerHorizontal="true" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/container_bottom" android:background="@color/white" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="65.0dip" android:layout_alignParentBottom="true">
+        <include android:id="@id/move_btn" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginRight="8.0dip" android:layout_weight="1.0" layout="@layout/bottom_button_view" />
+        <include android:id="@id/restore_btn" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" layout="@layout/bottom_button_view" />
+    </LinearLayout>
+    <View android:id="@id/divider" android:background="@drawable/bg_bottom_opt_bar" android:layout_width="fill_parent" android:layout_height="2.0dip" android:layout_above="@id/container_bottom" />
+</RelativeLayout>

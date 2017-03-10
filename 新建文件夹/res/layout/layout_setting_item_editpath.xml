@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/style_setting_item"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res-auto">
+    <android.widget.TextView android:id="@id/item_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/backup_path" android:layout_toLeftOf="@id/item_btn_editpath" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_centerVertical="true" style="@style/text_style_setting_line1" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/setting_line2_margintop_size" android:layout_below="@id/item_title">
+        <ImageView android:id="@id/item_path_volume" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/s_d" />
+        <android.widget.TextView android:ellipsize="end" android:gravity="center_vertical" android:id="@id/item_path_preview" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="10.0dip" android:text="Storage/emulated/received/.." android:maxLines="1" android:layout_toRightOf="@id/item_path_volume" style="@style/text_style_setting_line2" />
+    </LinearLayout>
+    <TextView android:id="@id/item_btn_editpath" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/set" android:layout_alignParentRight="true" android:textAllCaps="false" style="@style/style_setting_btn_set" />
+</RelativeLayout>

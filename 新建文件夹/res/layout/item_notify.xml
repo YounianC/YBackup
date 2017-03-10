@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/type_rl" android:layout_width="wrap_content" android:layout_height="46.0dip">
+        <View android:id="@id/line1" android:background="@color/grey_seven" android:layout_width="1.0dip" android:layout_height="10.0dip" android:layout_marginLeft="27.0dip" />
+        <ImageView android:id="@id/type_iv" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/personal_icon" android:layout_below="@id/line1" />
+        <View android:id="@id/line2" android:background="@color/grey_seven" android:layout_width="1.0dip" android:layout_height="fill_parent" android:layout_marginLeft="27.0dip" android:layout_below="@id/type_iv" />
+        <android.widget.TextView android:textSize="11.0sp" android:textColor="@color/black_54" android:id="@id/time_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_alignParentRight="true" android:layout_centerVertical="true" />
+        <android.widget.TextView android:textSize="13.0sp" android:textStyle="bold" android:textColor="@color/black_54" android:id="@id/type_title_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="5.0dip" android:maxLines="1" android:layout_toLeftOf="@id/time_tv" android:layout_toRightOf="@id/type_iv" android:layout_centerVertical="true" />
+    </RelativeLayout>
+    <include layout="@layout/item_notify_detail" />
+</LinearLayout>

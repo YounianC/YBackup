@@ -45,14 +45,16 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
     private static final String NAME = "name";
     private static final String PHONE = "phone";
     private String defaultPath;
+    private boolean ifBackupVCF;
 
-    public ContactTask(Context context, String defaultPath) throws FileNotFoundException {
+    public ContactTask(Context context, String defaultPath, boolean ifvcf) throws FileNotFoundException {
+        ifBackupVCF = ifvcf;
         String path = defaultPath + "/" + Constants.formatDate.format(new Date());
         File file = new File(path);
         if (!file.exists()) {
             file.mkdirs();
         }
-        File xmlFile = new File(file, "contacts" + Constants.formatTime.format(new Date()) + ".xml");
+        File xmlFile = new File(file, Constants.File_Contacts);
         this.defaultPath = path;
         pbarDialog = new ProgressDialog(context);
         pbarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -88,7 +90,8 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
                 }
                 writer.writeEndTAG(CONTACTS);
 
-                exportContacts();
+                if (ifBackupVCF)
+                    exportContacts();
             } catch (IOException e) {
                 e.printStackTrace();
                 Log.w("ContactTask", e.toString());
@@ -175,33 +178,4 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
         }
         fout.close();
     }
-
-	/*private JSONArray array = new JSONArray();
-    public void getContact(View view){
-		ContentResolver resolver = getContentResolver();
-		Uri URI = ContactsContract.Contacts.CONTENT_URI;
-		String[] columns = new String[]{ContactsContract.Contacts._ID, PhoneLookup.DISPLAY_NAME};
-		Cursor cursor = resolver.query(URI, columns, PhoneLookup.HAS_PHONE_NUMBER + "=1", null, null);
-		while(cursor.moveToNext()){
-			String phoneNum = "";
-			Cursor cursor2 = resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-					new String[]{ContactsContract.CommonDataKinds.Phone.NUMBER}, 
-					ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + cursor.getLong(0), null, null);
-			while(cursor2.moveToNext()){
-				phoneNum += cursor2.getString(0) + "||";
-			}
-			cursor2.close();
-			Log.i(TAG, "-" + cursor.getLong(0) + ":" + cursor.getString(1) + "::" + phoneNum);
-			JSONObject obj = new JSONObject();
-			try {
-				obj.put("id", cursor.getLong(0));
-				obj.put("name", cursor.getLong(1));
-				obj.put("phone", phoneNum);
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			array.put(obj);
-		}
-		cursor.close();
-	}*/
 }

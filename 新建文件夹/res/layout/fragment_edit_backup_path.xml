@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+        <LinearLayout android:orientation="vertical" android:id="@id/ll_volume_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </ScrollView>
+    <include android:id="@id/confirm_ll" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="65.0dip" android:layout_alignParentBottom="true" layout="@layout/layout_bottom_opt" />
+    <RelativeLayout android:id="@id/cv_pb" android:paddingLeft="15.0dip" android:paddingTop="5.0dip" android:paddingRight="15.0dip" android:paddingBottom="10.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true">
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/txt_dark_green" android:gravity="left" android:id="@id/tv_pb_info" android:paddingBottom="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_toLeftOf="@id/tv_pb_status" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/txt_dark_green" android:gravity="right" android:id="@id/tv_pb_status" android:paddingBottom="3.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+        <mobi.infolife.appbackup.ui.image.AnimatingProgressBar android:id="@id/pb_edit_path" android:layout_width="fill_parent" android:layout_height="wrap_content" android:progress="0" android:layout_below="@id/tv_pb_status" style="@style/BrProgressBar" />
+    </RelativeLayout>
+    <View android:orientation="vertical" android:id="@id/mask" android:background="@color/black_50" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <RelativeLayout android:id="@id/rl_select_path" android:background="@color/white" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="328.0dip">
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/black_40" android:ellipsize="start" android:id="@id/current_folder_path" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginBottom="19.0dip" android:text="cccc" android:maxLines="1" android:singleLine="true" />
+        <ListView android:id="@id/lv_folders" android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="260.0dip" android:divider="@null" android:layout_above="@id/rl_bottom" android:layout_below="@id/current_folder_path" />
+        <LinearLayout android:gravity="center_vertical" android:id="@id/rl_bottom" android:layout_width="fill_parent" android:layout_height="52.0dip" android:layout_alignParentBottom="true">
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/teal" android:id="@id/tv_create_folder" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:text="@string/new_folder" android:layout_weight="1.0" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/edit_path_text_color" android:id="@id/tv_select" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginRight="32.0dip" android:text="@string/select" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/teal" android:id="@id/tv_cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="16.0dip" android:text="@string/cancel" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

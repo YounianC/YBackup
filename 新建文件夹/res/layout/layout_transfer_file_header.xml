@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/send_files_header" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="25.0dip">
+        <ImageView android:id="@id/sendingHeadImg" android:layout_width="62.0dip" android:layout_height="62.0dip" android:layout_marginLeft="3.0dip" android:layout_marginRight="3.0dip" android:src="@drawable/ic_phone_android" android:scaleType="center" />
+        <RelativeLayout android:orientation="vertical" android:id="@id/progressLayout" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="186.0">
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/battleship_grey" android:gravity="center" android:id="@id/sendingSpeed" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:layout_above="@id/sendingProgress" />
+            <ProgressBar android:id="@id/sendingProgress" android:layout_width="fill_parent" android:layout_height="3.0dip" android:progressDrawable="@drawable/bottom_task_progress" android:layout_centerVertical="true" style="?android:attr/progressBarStyleHorizontal" />
+        </RelativeLayout>
+        <ImageView android:id="@id/sendStatusImg" android:visibility="visible" android:layout_width="0.0dip" android:layout_height="fill_parent" android:src="@drawable/waiting_for_send_img" android:layout_weight="186.0" />
+        <ImageView android:id="@id/receivingHeadImg" android:layout_width="62.0dip" android:layout_height="62.0dip" android:layout_marginLeft="3.0dip" android:layout_marginRight="3.0dip" android:src="@drawable/ic_phone_android" android:scaleType="center" />
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="16.0dip" android:layout_marginRight="16.0dip" android:weightSum="2.0">
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/gunmetal" android:gravity="left" android:id="@id/senderName" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/gunmetal" android:gravity="right" android:id="@id/receiverName" android:layout_width="wrap_content" android:layout_height="fill_parent" android:singleLine="true" android:layout_weight="1.0" />
+    </LinearLayout>
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip">
+        <ImageView android:id="@id/sending_triangle" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="30.0dip" android:src="@drawable/sending_triangle" android:layout_alignBottom="@id/sendingStatus" android:layout_alignParentLeft="true" />
+        <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/teal" android:gravity="center" android:id="@id/sendingStatus" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+    <TextView android:background="@color/white" android:layout_width="fill_parent" android:layout_height="2.0dip" android:layout_marginLeft="15.0dip" android:layout_marginRight="15.0dip" />
+</LinearLayout>

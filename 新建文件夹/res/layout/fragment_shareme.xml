@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center" android:orientation="vertical" android:background="@color/white_seven" android:paddingLeft="16.0dip" android:paddingRight="16.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textSize="14.0sp" android:textColor="@color/black_40" android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="34.0dip" android:text="@string/choose_method_new" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/use_wifi" android:background="@drawable/bg_feedback" android:layout_width="fill_parent" android:layout_height="70.0dip" android:layout_marginTop="32.0dip">
+        <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="32.0dip" android:src="@drawable/invite_wifi" />
+        <android.widget.TextView android:textSize="15.0sp" android:textColor="@color/black_50" android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="23.0dip" android:text="@string/use_wifi" android:layout_weight="1.0" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="11.0dip" android:src="@drawable/invite_right_arrow" />
+    </LinearLayout>
+    <android.widget.TextView android:textSize="15.0sp" android:textColor="@color/black_40" android:layout_gravity="center" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/recommend" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/use_bluetooth" android:background="@drawable/bg_feedback" android:layout_width="fill_parent" android:layout_height="70.0dip" android:layout_marginTop="16.0dip">
+        <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="32.0dip" android:src="@drawable/invite_bluetooth" />
+        <android.widget.TextView android:textSize="15.0sp" android:textColor="@color/black_50" android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="23.0dip" android:text="@string/use_bluetooth" android:layout_weight="1.0" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="11.0dip" android:src="@drawable/invite_right_arrow" />
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/use_other" android:background="@drawable/bg_feedback" android:layout_width="fill_parent" android:layout_height="70.0dip" android:layout_marginTop="16.0dip">
+        <ImageView android:layout_width="35.0dip" android:layout_height="35.0dip" android:layout_marginLeft="32.0dip" android:src="@drawable/invite_other" />
+        <android.widget.TextView android:textSize="15.0sp" android:textColor="@color/black_50" android:layout_gravity="center_vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="23.0dip" android:text="@string/use_others" android:layout_weight="1.0" />
+        <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="11.0dip" android:src="@drawable/invite_right_arrow" />
+    </LinearLayout>
+</LinearLayout>

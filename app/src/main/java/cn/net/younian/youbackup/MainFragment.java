@@ -145,7 +145,7 @@ public class MainFragment extends Fragment {
             if (firstLoad)
                 Toast.makeText(view.getContext(), "导入" + strs.length + "个文件！", Toast.LENGTH_SHORT).show();
             for (String str : strs) {
-                list.add(0, new FileInfo(str, false));
+                list.add(0, new FileInfo(Constants.defaultPath, str, false));
             }
         }
         fileAdapter.setData(list);

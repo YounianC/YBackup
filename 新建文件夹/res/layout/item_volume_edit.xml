@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/layout_editpatch_item" android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/ll_selected" android:background="@color/white" android:padding="32.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentLeft="true" android:layout_alignParentTop="true">
+        <LinearLayout android:layout_width="fill_parent" android:layout_height="24.0dip">
+            <ImageView android:id="@id/iv_storage_type_selected" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/internal" />
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/black_54" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/tv_storage_mount_name_selected" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_marginLeft="1.0dip" android:maxLines="1" android:layout_weight="1.0" />
+            <android.widget.TextView android:textSize="14.0sp" android:textColor="@color/teal" android:layout_gravity="center_vertical" android:id="@id/tv_storage_show" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/full_path" />
+        </LinearLayout>
+        <LinearLayout android:orientation="horizontal" android:id="@id/history_ll" android:background="@color/white_grey_3" android:layout_width="fill_parent" android:layout_height="31.0dip" android:layout_marginTop="16.0dip" android:layout_marginBottom="8.0dip">
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/black_54" android:textColorHint="#ff979797" android:ellipsize="end" android:gravity="center_vertical" android:id="@id/tv_storage_dirname" android:paddingLeft="7.0dip" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_marginRight="16.0dip" android:text="ccccc" android:maxLines="1" android:layout_weight="1.0" />
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/mIv_triangle" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginRight="8.0dip" android:src="@drawable/triangle_down" />
+        </LinearLayout>
+        <Button android:textSize="18.0sp" android:textColor="@color/btn_bottom_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/btn_storage_browse" android:background="@drawable/bg_btn_bottom_opt" android:layout_width="fill_parent" android:layout_height="43.0dip" android:text="@string/browse" android:textAllCaps="false" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ll_unselected" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="100.0dip" android:layout_below="@id/ll_selected" android:layout_alignParentLeft="true">
+        <LinearLayout android:orientation="horizontal" android:padding="32.0dip" android:layout_width="fill_parent" android:layout_height="99.0dip">
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/iv_storage_type_unselected" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/internal" />
+            <android.widget.TextView android:textSize="12.0sp" android:textColor="@color/black_54" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/tv_storage_mount_name_unselected" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="2.0dip" android:text="/storage/emulated/0" android:maxLines="1" />
+        </LinearLayout>
+        <View android:background="@color/black_20" android:layout_width="fill_parent" android:layout_height="1.0dip" />
+    </LinearLayout>
+</RelativeLayout>

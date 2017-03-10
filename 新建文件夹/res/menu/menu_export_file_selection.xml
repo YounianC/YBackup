@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:icon="@drawable/ic_send_black" android:id="@id/export_send" android:title="@string/send" android:showAsAction="ifRoom" />
+    <item android:icon="@drawable/ic_google_drive_black" android:id="@id/export_drive" android:title="@string/upload" android:showAsAction="ifRoom" />
+    <item android:icon="@drawable/ic_share" android:id="@id/export_share" android:title="@string/share" android:showAsAction="ifRoom" />
+</menu>

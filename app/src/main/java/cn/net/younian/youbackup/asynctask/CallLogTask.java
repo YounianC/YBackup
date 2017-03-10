@@ -46,7 +46,7 @@ public class CallLogTask extends AsyncTask<Void, Void, String> {
         if (!file.exists()) {
             file.mkdirs();
         }
-        File xmlFile = new File(file, "call" + Constants.formatTime.format(new Date()) + ".xml");
+        File xmlFile = new File(file, Constants.File_CallLog);
         pbarDialog = new ProgressDialog(context);
         pbarDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         pbarDialog.setMessage("通话记录备份中...");

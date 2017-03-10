@@ -16,10 +16,24 @@ public class Constants {
     public static DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     public static DateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public static String defaultPath = Environment.getExternalStorageDirectory() + "/YBackUp";
+    public static String defaultPath = Environment.getExternalStorageDirectory() + "/YBackUp/";
 
     static {
         formatDate.setTimeZone(TimeZone.getTimeZone("GMT+08"));
         formatTime.setTimeZone(TimeZone.getTimeZone("GMT+08"));
     }
+
+    public static final String SharedPreferencesName = "ybackup";
+    public static final String Setting_BackupVCF = "Setting_BackupVCF";
+    public static final String Setting_AutoBackup = "Setting_AutoBackup";
+
+    public static final String Info_CountContacts = "Info_CountContacts";
+    public static final String Info_CountSMS = "Info_CountSMS";
+    public static final String Info_CountCallLog = "Info_CountCallLog";
+
+
+    public static final String File_Contacts = "contacts.xml";
+    public static final String File_SMS = "sms.xml";
+    public static final String File_CallLog = "calllog.xml";
+    public static final String File_Info = "info.txt";
 }

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/layout_rate_us_item" android:background="@drawable/bg_feedback" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.widget.TextView android:textSize="16.0dip" android:textColor="@color/black_54" android:layout_gravity="center_horizontal" android:id="@id/rate_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:text="@string/rate_us" />
+    <RatingBar android:layout_gravity="center_horizontal" android:id="@id/ratingBar" android:layout_width="wrap_content" android:layout_height="40.0dip" android:layout_marginBottom="8.0dip" android:numStars="5" android:stepSize="1.0" style="@style/rateuslib_RateUsRatingBarLarge" />
+</LinearLayout>

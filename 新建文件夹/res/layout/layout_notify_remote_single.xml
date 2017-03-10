@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@color/white" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/iv_notification_icon" android:layout_width="45.0dip" android:layout_height="45.0dip" android:layout_margin="10.0dip" android:src="@drawable/a_b_r" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
+    <ImageView android:id="@id/iv_flag_notification_type" android:layout_width="20.0dip" android:layout_height="20.0dip" android:layout_marginLeft="39.0dip" android:layout_marginTop="39.0dip" android:layout_marginBottom="6.0dip" android:src="@drawable/autobackup_small_icon" android:layout_alignParentLeft="true" />
+    <RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_toRightOf="@id/iv_notification_icon" android:layout_centerVertical="true">
+        <TextView android:id="@id/tv_notification_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="title" android:maxLines="1" android:layout_toLeftOf="@id/tv_notification_msg2" android:layout_alignParentLeft="true" style="@style/TextStyle_Notify_Title" />
+        <TextView android:id="@id/tv_notification_msg2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3.0dip" android:layout_marginRight="14.0dip" android:text="msgdddd" android:layout_alignParentRight="true" style="@style/TextStyle_Notify_Msg" />
+        <TextView android:ellipsize="end" android:id="@id/tv_notification_msg" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:text="msg2" android:maxLines="1" android:layout_below="@id/tv_notification_title" style="@style/TextStyle_Notify_Msg" />
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/home_bottom_ad" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="81.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/ad_iv" android:layout_width="fill_parent" android:layout_height="81.0dip" android:src="@drawable/home_bottom_ad_iv" android:scaleType="centerCrop" />
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:background="@color/transparent" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginLeft="84.0dip" android:layout_marginRight="16.0dip">
+        <android.widget.TextView android:textSize="14.0sp" android:textStyle="bold" android:textColor="@color/battleship_grey" android:ellipsize="end" android:id="@id/title_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/home_bottom_ad_title" android:maxLines="1" />
+        <android.widget.TextView android:textSize="10.0sp" android:textColor="@color/battleship_grey" android:ellipsize="end" android:id="@id/subtitle_tv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:text="@string/home_bottom_ad_subtitle" android:maxLines="3" android:lineSpacingExtra="2.0dip" />
+    </LinearLayout>
+</FrameLayout>

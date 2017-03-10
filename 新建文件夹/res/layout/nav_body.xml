@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/switch_storage" android:visibility="visible" layout="@layout/nav_header_home" />
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_market_tms" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_trustlook" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/trustlook_antivirus" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_market_cc" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_cache_cleaner" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/cache_cleaner" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_mobvista" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_gift" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/recommend_mob" />
+            </LinearLayout>
+            <View android:background="@color/black_10" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_setting" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_settings" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/settings" />
+            </LinearLayout>
+            <View android:background="@color/black_10" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_send" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_send" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/send" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_receive" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_recesive" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/receive" />
+            </LinearLayout>
+            <View android:background="@color/black_10" android:layout_width="fill_parent" android:layout_height="1.0dip" android:layout_marginLeft="16.0dip" />
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_scan_apk" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_scan_apk" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/scan_apk" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_scan_virus" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_virus_scan" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/scan_virus" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_invite" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_share" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/invite" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_feedback" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_feedback" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/feedback" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/menu_item_about" android:background="@drawable/bg_white_seven" android:layout_width="fill_parent" android:layout_height="51.0dip">
+                <ImageView android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_marginLeft="16.0dip" android:src="@drawable/ic_about" />
+                <TextView android:textSize="14.0sp" android:textColor="@color/black_54" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="32.0dip" android:text="@string/fragment_about" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

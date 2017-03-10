@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v4.widget.DrawerLayout android:id="@id/drawer_layout" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+      xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+        <mobi.infolife.appbackup.uimd.view.CustomCoordinatorLayout android:id="@id/id_coordinatorLayout" android:fitsSystemWindows="true" android:layout_width="fill_parent" android:layout_height="fill_parent"
+          xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+            <android.support.design.widget.AppBarLayout android:theme="@style/AppTheme.AppBarOverlay" android:id="@id/id_appbarlayout" android:layout_width="fill_parent" android:layout_height="wrap_content" app:elevation="0.0dip">
+                <android.support.v7.widget.Toolbar android:id="@id/my_toolbar" android:background="?colorPrimary" android:paddingRight="4.0dip" android:layout_width="fill_parent" android:layout_height="?actionBarSize" app:popupTheme="@style/AppTheme.PopupOverlay" app:layout_scrollFlags="enterAlways|scroll|snap" />
+            </android.support.design.widget.AppBarLayout>
+            <FrameLayout android:id="@id/container_body" android:background="@color/white_seven" android:layout_width="fill_parent" android:layout_height="fill_parent" app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+            <FrameLayout android:layout_gravity="bottom" android:orientation="horizontal" android:id="@id/bottom_base_fl" android:background="@color/white" android:layout_width="fill_parent" android:layout_height="65.0dip" />
+            <FrameLayout android:gravity="top" android:id="@id/search_view_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            <FrameLayout android:gravity="top" android:id="@id/action_toolbar_container" android:layout_width="fill_parent" android:layout_height="?actionBarSize" />
+        </mobi.infolife.appbackup.uimd.view.CustomCoordinatorLayout>
+        <android.support.design.widget.NavigationView android:layout_gravity="start" android:id="@id/nav_view" android:background="@color/white_seven" android:fitsSystemWindows="false" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <include android:id="@id/id_nav_body" layout="@layout/nav_body" />
+        </android.support.design.widget.NavigationView>
+    </android.support.v4.widget.DrawerLayout>
+    <ViewStub android:id="@id/id_mask_switch_category_stub" android:layout="@layout/layout_mask_switch_category" android:inflatedId="@id/id_mask_switch_category_after_inflate" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <ViewStub android:id="@id/id_mask_switch_storage_stub" android:layout="@layout/layout_mask_switch_storage" android:inflatedId="@id/id_mask_switch_storage_after_inflate" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</merge>
