@@ -1,13 +1,16 @@
 package cn.net.younian.youbackup.asynctask;
 
+import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.support.annotation.RequiresApi;
@@ -22,13 +25,13 @@ import java.io.IOException;
 import java.util.Date;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.handler.BackupHandler;
 import cn.net.younian.youbackup.util.Constants;
 import cn.net.younian.youbackup.util.XMLWriter;
 
 
-@RequiresApi(api = Build.VERSION_CODES.N)
-public class ContactTask extends AsyncTask<Void, Void, String> {
-
+public class ContactTask extends VoidAsyncTask<String> {
+    private Handler handler;
     private Context context;
     private ProgressDialog pbarDialog;
     private ContentResolver resolver;
@@ -47,8 +50,13 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
     private String defaultPath;
     private boolean ifBackupVCF;
 
-    public ContactTask(Context context, String defaultPath, boolean ifvcf) throws FileNotFoundException {
-        ifBackupVCF = ifvcf;
+    @TargetApi(Build.VERSION_CODES.N)
+    public ContactTask(Handler handler, Context context, String defaultPath) throws FileNotFoundException {
+        this.context = context;
+        this.handler = handler;
+        SharedPreferences sp = context.getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
+        ifBackupVCF = sp.getBoolean(Constants.Setting_BackupVCF, false);
+
         String path = defaultPath + "/" + Constants.formatDate.format(new Date());
         File file = new File(path);
         if (!file.exists()) {
@@ -63,7 +71,6 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
 
         resolver = context.getContentResolver();
         writer = new XMLWriter(xmlFile);
-        this.context = context;
     }
 
     @Override
@@ -135,13 +142,12 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
         dataCursor.close();
     }
 
+    @TargetApi(Build.VERSION_CODES.N)
     @Override
     protected void onPostExecute(String result) {
         pbarDialog.dismiss();
         if (result != null) {
-            // 将上下文转换为MainActivity，并调用loadData方法刷新数据
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.notifyLoadData();
+            ((BackupHandler) handler).notifyFinished();
             Toast.makeText(context, "成功备份" + sumCount + "个联系人", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "联系人备份失败", Toast.LENGTH_SHORT).show();
@@ -157,8 +163,9 @@ public class ContactTask extends AsyncTask<Void, Void, String> {
     /**
      * Exporting contacts from the phone
      */
+    @TargetApi(Build.VERSION_CODES.N)
     public void exportContacts() throws Exception {
-        String path = defaultPath + "/" + "contacts" + Constants.formatTime.format(new Date()) + ".vcf";
+        String path = defaultPath + "/" + Constants.File_ContactsVCF;
 
         ContentResolver cr = resolver;
         Cursor cur = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);

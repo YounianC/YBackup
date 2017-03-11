@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
@@ -17,13 +18,15 @@ import java.io.IOException;
 import java.util.Date;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.handler.BackupHandler;
 import cn.net.younian.youbackup.util.Constants;
 import cn.net.younian.youbackup.util.XMLWriter;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class SmsTask extends AsyncTask<Void, Void, String> {
+public class SmsTask extends VoidAsyncTask<String> {
 
+    private Handler handler;
     private Context context;
     private ProgressDialog pbarDialog;
     private static final String PATH = "content://sms/"; //所有短信
@@ -43,7 +46,9 @@ public class SmsTask extends AsyncTask<Void, Void, String> {
     private static final String DATE = "date";
     //private static final String PERSON = "person";
 
-    public SmsTask(Context context, String defaultPath) throws FileNotFoundException {
+    public SmsTask(Handler handler, Context context, String defaultPath) throws FileNotFoundException {
+        this.handler = handler;
+        this.context = context;
         String path = defaultPath + "/" + Constants.formatDate.format(new Date());
         File file = new File(path);
         if (!file.exists()) {
@@ -110,9 +115,7 @@ public class SmsTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         pbarDialog.dismiss();
         if (result != null) {
-            // 将上下文转换为MainActivity，并调用loadData方法刷新数据
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.notifyLoadData();
+            ((BackupHandler) handler).notifyFinished();
             Toast.makeText(context, "成功备份" + sumCount + "条短信", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "短信备份失败", Toast.LENGTH_SHORT).show();

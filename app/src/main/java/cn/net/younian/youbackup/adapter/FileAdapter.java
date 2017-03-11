@@ -1,6 +1,8 @@
 package cn.net.younian.youbackup.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
@@ -9,6 +11,9 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,16 +38,6 @@ public class FileAdapter extends BaseAdapter {
         this.data = data;
     }
 
-    public List<FileInfo> getCheckedFile(List<FileInfo> list) {
-        //List<FileInfo> list = new ArrayList<FileInfo>();
-        for (FileInfo info : data) {
-            if (info.isChecked()) {
-                list.add(info);
-            }
-        }
-        return list;
-    }
-
     public List<FileInfo> getCheckedFile() {
         List<FileInfo> list = new ArrayList<FileInfo>();
         for (FileInfo info : data) {
@@ -51,15 +46,6 @@ public class FileAdapter extends BaseAdapter {
             }
         }
         return list;
-    }
-
-    public boolean isExistChecked() {
-        for (FileInfo info : data) {
-            if (info.isChecked()) {
-                return true;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -88,6 +74,9 @@ public class FileAdapter extends BaseAdapter {
             holder.info_count_contacts = (TextView) convertView.findViewById(R.id.item_info_contacts);
             holder.info_count_sms = (TextView) convertView.findViewById(R.id.item_info_sms);
             holder.info_count_calllog = (TextView) convertView.findViewById(R.id.item_info_calllog);
+            holder.iv_personal_file_detail = (TextView) convertView.findViewById(R.id.iv_personal_file_detail);
+            holder.linearLayout = (LinearLayout) convertView.findViewById(R.id.item);
+            holder.iv_edit_name = (ImageView) convertView.findViewById(R.id.iv_edit_name);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -98,7 +87,8 @@ public class FileAdapter extends BaseAdapter {
         holder.info_count_contacts.setText("" + info.getCountContacts());
         holder.info_count_sms.setText("" + info.getCountSMS());
         holder.info_count_calllog.setText("" + info.getCountCallLog());
-        holder.file_name.setOnClickListener(new OnClickListener() {
+        holder.iv_personal_file_detail.setText(info.getTime());
+        holder.linearLayout.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
@@ -114,16 +104,42 @@ public class FileAdapter extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
+        final int index = position;
+        holder.iv_edit_name.setOnClickListener(new OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(View v) {
+                showEditNameDialog(index);
+            }
+        });
         return convertView;
     }
 
+    private void showEditNameDialog(final int index) {
+        final EditText inputServer = new EditText(context);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("编辑名称").setView(inputServer)
+                .setNegativeButton("取消", null);
+        builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                data.get(index).setName(inputServer.getText().toString());
+                data.get(index).updateInfoFile();
+            }
+        });
+        builder.show();
+    }
+
     private class ViewHolder {
+        public LinearLayout linearLayout;
         public CheckBox cb_file;
         public TextView file_name;
 
         public TextView info_count_contacts;
         public TextView info_count_sms;
         public TextView info_count_calllog;
+
+        public TextView iv_personal_file_detail;
+        public ImageView iv_edit_name;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

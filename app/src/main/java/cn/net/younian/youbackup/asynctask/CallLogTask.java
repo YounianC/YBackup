@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Handler;
 import android.provider.CallLog;
 import android.provider.CallLog.Calls;
 import android.support.annotation.RequiresApi;
@@ -18,13 +19,14 @@ import java.io.IOException;
 import java.util.Date;
 
 import cn.net.younian.youbackup.MainActivity;
+import cn.net.younian.youbackup.handler.BackupHandler;
 import cn.net.younian.youbackup.util.Constants;
 import cn.net.younian.youbackup.util.XMLWriter;
 
 
 @RequiresApi(api = Build.VERSION_CODES.N)
-public class CallLogTask extends AsyncTask<Void, Void, String> {
-
+public class CallLogTask extends VoidAsyncTask<String> {
+    Handler handler;
     private Context context;
     private ProgressDialog pbarDialog;
     private ContentResolver resolver;
@@ -40,7 +42,9 @@ public class CallLogTask extends AsyncTask<Void, Void, String> {
     private static final String DATE = "date";
     private static final String DURATION = "duration";
 
-    public CallLogTask(Context context, String defaultPath) throws FileNotFoundException {
+    public CallLogTask(Handler handler, Context context, String defaultPath) throws FileNotFoundException {
+        this.handler = handler;
+        this.context = context;
         String path = defaultPath + "/" + Constants.formatDate.format(new Date());
         File file = new File(path);
         if (!file.exists()) {
@@ -105,8 +109,7 @@ public class CallLogTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         pbarDialog.dismiss();
         if (result != null) {
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.notifyLoadData();
+            ((BackupHandler) handler).notifyFinished();
             Toast.makeText(context, "成功备份" + sumCount + "条通话记录", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(context, "通话记录备份失败", Toast.LENGTH_SHORT).show();

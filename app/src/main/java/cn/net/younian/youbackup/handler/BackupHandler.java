@@ -2,16 +2,21 @@ package cn.net.younian.youbackup.handler;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.RequiresApi;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
+import cn.net.younian.youbackup.MainActivity;
 import cn.net.younian.youbackup.asynctask.CallLogTask;
 import cn.net.younian.youbackup.asynctask.ContactTask;
 import cn.net.younian.youbackup.asynctask.SmsTask;
+import cn.net.younian.youbackup.asynctask.VoidAsyncTask;
 import cn.net.younian.youbackup.util.Constants;
 
 /**
@@ -19,6 +24,12 @@ import cn.net.younian.youbackup.util.Constants;
  */
 @RequiresApi(api = Build.VERSION_CODES.N)
 public class BackupHandler extends Handler {
+
+    List<VoidAsyncTask> taskList = new ArrayList<>();
+
+    int tatalTaskCount;
+    int finishedTaskCount;
+
     private Context context;
 
     public BackupHandler(Context context) {
@@ -27,38 +38,27 @@ public class BackupHandler extends Handler {
 
     @Override
     public void handleMessage(Message msg) {
-        quickBackup();
-    }
-
-    public void quickBackup() {
-        smsBackup();
-        contactBackup();
-        callLog();
-    }
-
-
-    public void smsBackup() {
         try {
-            new SmsTask(context, Constants.defaultPath).execute();
+            taskList.add(new ContactTask(this, context, Constants.defaultPath));
+            taskList.add(new SmsTask(this, context, Constants.defaultPath));
+            taskList.add(new CallLogTask(this, context, Constants.defaultPath));
+
+            if (taskList != null && taskList.size() > 0) {
+                (taskList.get(0)).execute();
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void contactBackup() {
-        try {
-            SharedPreferences sp = context.getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
-            new ContactTask(context, Constants.defaultPath, sp.getBoolean(Constants.Setting_BackupVCF, false)).execute();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void callLog() {
-        try {
-            new CallLogTask(context, Constants.defaultPath).execute();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+    public void notifyFinished() {
+        taskList.remove(0);
+        if (taskList.size() > 0) {
+            taskList.get(0).execute();
+        } else if (taskList.size() == 0) {
+            // 将上下文转换为MainActivity，并调用loadData方法刷新数据
+            MainActivity mainActivity = (MainActivity) context;
+            mainActivity.notifyLoadData();
         }
     }
 }

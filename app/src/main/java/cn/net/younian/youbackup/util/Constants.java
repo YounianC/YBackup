@@ -26,13 +26,16 @@ public class Constants {
     public static final String SharedPreferencesName = "ybackup";
     public static final String Setting_BackupVCF = "Setting_BackupVCF";
     public static final String Setting_AutoBackup = "Setting_AutoBackup";
+    public static final String Setting_AutoBackupTime = "Setting_AutoBackupTime";
 
     public static final String Info_CountContacts = "Info_CountContacts";
     public static final String Info_CountSMS = "Info_CountSMS";
     public static final String Info_CountCallLog = "Info_CountCallLog";
+    public static final String Info_Name = "Info_Name";
 
 
     public static final String File_Contacts = "contacts.xml";
+    public static final String File_ContactsVCF = "contacts.vcf";
     public static final String File_SMS = "sms.xml";
     public static final String File_CallLog = "calllog.xml";
     public static final String File_Info = "info.txt";

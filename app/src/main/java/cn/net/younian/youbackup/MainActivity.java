@@ -68,7 +68,6 @@ public class MainActivity extends AppCompatActivity
 
         menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
         backupHandler = new BackupHandler(this);
-        autoCheckBackup();
     }
 
     @Override
@@ -179,14 +178,15 @@ public class MainActivity extends AppCompatActivity
         switchContent("还原 - " + info.getName(), mFragment, restoreFragment);
     }
 
-    public void autoCheckBackup() {
-        SharedPreferences sp = this.getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
-        if (sp.getBoolean(Constants.Setting_AutoBackup, false)) {
+    public void notifyAutoBackup(boolean flag) {
+        if (flag) {
             Toast.makeText(this, "===自动备份开始==", Toast.LENGTH_SHORT).show();
             Message msg = new Message();
             Bundle b = new Bundle();// 存放数据
             b.putString("color", "我的");
             backupHandler.sendMessage(msg);
+        } else {
+            Toast.makeText(this, "跳过本次自动备份", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -202,5 +202,6 @@ public class MainActivity extends AppCompatActivity
         Bundle b = new Bundle();// 存放数据
         b.putString("color", "我的");
         backupHandler.sendMessage(msg);
+        menuMultipleActions.toggle();
     }
 }

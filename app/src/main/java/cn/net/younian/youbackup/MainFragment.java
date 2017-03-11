@@ -1,21 +1,27 @@
 package cn.net.younian.youbackup;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.icu.text.DateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import cn.net.younian.youbackup.adapter.FileAdapter;
@@ -32,8 +38,15 @@ public class MainFragment extends Fragment {
     private ListView lv_show;
     private FileAdapter fileAdapter;
     private List<FileInfo> list;
-    public static final String TAG = "main";
     private File baseFile;
+
+    public MainFragment() {
+        list = new ArrayList<FileInfo>();
+        baseFile = new File(Constants.defaultPath);
+        if (!baseFile.exists()) {
+            baseFile.mkdirs();
+        }
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -44,31 +57,9 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
         view = inflater.inflate(R.layout.content_main, container, false);
-
         lv_show = (ListView) view.findViewById(R.id.lv_show);
-        list = new ArrayList<FileInfo>();
         fileAdapter = new FileAdapter(this.getContext(), list);
-
         lv_show.setAdapter(fileAdapter);
-        lv_show.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                FileInfo info = (FileInfo) parent.getItemAtPosition(position);
-                /*info.setChecked(!info.isChecked());
-                fileAdapter.notifyDataSetChanged();
-				if (fileAdapter.isExistChecked()) {
-					ll_opt.setVisibility(View.VISIBLE);
-				} else {
-					ll_opt.setVisibility(View.GONE);
-				}*/
-                Log.i(TAG, "name = " + info.getName());
-            }
-        });
-        baseFile = new File(Constants.defaultPath);
-        if (!baseFile.exists()) {
-            baseFile.mkdirs();
-        }
         loadData(true);
         return view;
     }
@@ -95,10 +86,9 @@ public class MainFragment extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        List<FileInfo> files = new ArrayList<FileInfo>();
-                        files = fileAdapter.getCheckedFile(files);
+                        List<FileInfo> files = fileAdapter.getCheckedFile();
                         for (FileInfo info : files) {
-                            File file = new File(baseFile, info.getName());
+                            File file = new File(baseFile, info.getTime());
                             if (file.exists()) {
                                 deleteAllFilesOfDir(file);
                             }
@@ -110,49 +100,27 @@ public class MainFragment extends Fragment {
                 .setNegativeButton("取消", null).create().show();
     }
 
-    public void notifyRestore(FileInfo info) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-        builder.setTitle("提示")
-                .setMessage("确定要还原吗？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        List<FileInfo> files = new ArrayList<FileInfo>();
-                        files = fileAdapter.getCheckedFile(files);
-                        for (FileInfo info : files) {
-                            File file = new File(baseFile, info.getName());
-                            if (file.exists()) {
-                                /*try {
-                                    AsyncTask<Void, Void, String> smsTask = new SmsTaskRestore(view.getContext(), file);
-                                    smsTask.execute();
-                                } catch (FileNotFoundException e) {
-                                    e.printStackTrace();
-                                    Log.w(TAG, e.toString());
-                                }*/
-                            }
-                        }
-                        /*Toast.makeText(view.getContext(), "删除成功", Toast.LENGTH_SHORT).show();*/
-                        loadData(false);
-                    }
-                })
-                .setNegativeButton("取消", null).create().show();
-    }
-
     public void loadData(boolean firstLoad) {
         list.clear();
         String[] strs = baseFile.list();
         if (strs != null && strs.length > 0) {
-            if (firstLoad)
+            if (firstLoad) {
                 Toast.makeText(view.getContext(), "导入" + strs.length + "个文件！", Toast.LENGTH_SHORT).show();
+            }
             for (String str : strs) {
                 list.add(0, new FileInfo(Constants.defaultPath, str, false));
             }
         }
+        Collections.sort(list);
         fileAdapter.setData(list);
         fileAdapter.notifyDataSetChanged();
+
+        if (firstLoad) {
+            autoCheckBackup();
+        }
     }
 
-    public static void deleteAllFilesOfDir(File path) {
+    private void deleteAllFilesOfDir(File path) {
         if (!path.exists())
             return;
         if (path.isFile()) {
@@ -164,5 +132,23 @@ public class MainFragment extends Fragment {
             deleteAllFilesOfDir(files[i]);
         }
         path.delete();
+    }
+
+    @TargetApi(Build.VERSION_CODES.N)
+    public void autoCheckBackup() {
+        SharedPreferences sp = view.getContext().getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
+        if (sp.getBoolean(Constants.Setting_AutoBackup, false)) {
+            String time = list.size() > 0 ? list.get(0).getTime() : "";
+            if (time.equals("")) {
+                ((MainActivity) view.getContext()).notifyAutoBackup(true);
+                return;
+            }
+            try {
+                long t = (new Date().getTime() - Constants.formatDate.parse(time).getTime()) / 1000 / 60 / 60;
+                ((MainActivity) view.getContext()).notifyAutoBackup(t > sp.getInt(Constants.Setting_AutoBackupTime, 24));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
