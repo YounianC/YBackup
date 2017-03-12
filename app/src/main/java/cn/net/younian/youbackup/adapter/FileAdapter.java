@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.os.Vibrator;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,9 @@ public class FileAdapter extends BaseAdapter {
 
     private Context context;
     private List<FileInfo> data;
+
+    private Vibrator vibrate;
+    private final long[] pattern = {100, 400};   // 停止 开启
 
     public FileAdapter(Context context, List<FileInfo> data) {
         this.context = context;
@@ -66,6 +70,7 @@ public class FileAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
+        vibrate = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.item_file, null);
             holder = new ViewHolder();
@@ -95,6 +100,18 @@ public class FileAdapter extends BaseAdapter {
                 restore(info);
             }
         });
+        holder.linearLayout.setOnLongClickListener((new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                /*
+                * 想设置震动大小可以通过改变pattern来设定，如果开启时间太短，震动效果可能感觉不到
+                 * */
+                vibrate.vibrate(20);
+                info.setChecked(!info.isChecked());
+                notifyDataSetChanged();
+                return false;
+            }
+        }));
         holder.cb_file.setChecked(info.isChecked());
         holder.cb_file.setOnClickListener(new OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)

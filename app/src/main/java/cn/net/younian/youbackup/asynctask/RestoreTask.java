@@ -3,7 +3,6 @@ package cn.net.younian.youbackup.asynctask;
 import android.app.ProgressDialog;
 import android.content.ContentProviderOperation;
 import android.content.ContentResolver;
-import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import cn.net.younian.youbackup.MainActivity;
 import cn.net.younian.youbackup.entity.FileInfo;
@@ -38,9 +38,8 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
     private Context context;
     private ProgressDialog pbarDialog;
     private ContentResolver resolver;
-    private int sumCount = 0;
+    private int totalCount = 0;
     private int proNum = 0;
-    private Uri uri = ContactsContract.Contacts.CONTENT_URI;
 
     private JSONObject config;
     private FileInfo info;
@@ -92,6 +91,8 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
             parser.setInput(fis, "utf-8");
             ContentValues values = null;
             int type = parser.getEventType();
+            proNum = 0;
+            totalCount = info.getCountContacts();
             while (type != XmlPullParser.END_DOCUMENT) {
                 switch (type) {
                     case XmlPullParser.START_TAG:
@@ -100,7 +101,12 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
                         } else if ("name".equals(parser.getName())) {
                             values.put("name", parser.nextText());
                         } else if ("phone".equals(parser.getName())) {
-                            values.put("phone", parser.nextText());
+                            String t = values.getAsString("phone");
+                            if (t == null || t.equals(""))
+                                values.put("phone", parser.nextText());
+                            else {
+                                values.put("phone", t + "," + parser.nextText());
+                            }
                         } else if ("email".equals(parser.getName())) {
                             values.put("email", parser.nextText());
                         }
@@ -113,6 +119,7 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
                         break;
                 }
                 type = parser.next();
+                proNum++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -139,6 +146,8 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
             parser.setInput(fis, "utf-8");
             ContentValues values = null;
             int type = parser.getEventType();
+            proNum = 0;
+            totalCount = info.getCountSMS();
             while (type != XmlPullParser.END_DOCUMENT) {
                 switch (type) {
                     case XmlPullParser.START_TAG:
@@ -163,6 +172,7 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
                         break;
                 }
                 type = parser.next();
+                proNum++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -189,6 +199,8 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
             parser.setInput(fis, "utf-8");
             ContentValues values = null;
             int type = parser.getEventType();
+            proNum = 0;
+            totalCount = info.getCountCallLog();
             while (type != XmlPullParser.END_DOCUMENT) {
                 switch (type) {
                     case XmlPullParser.START_TAG:
@@ -212,6 +224,7 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
                         break;
                 }
                 type = parser.next();
+                proNum++;
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -228,19 +241,16 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String result) {
         pbarDialog.dismiss();
         if (result != null) {
-            // 将上下文转换为MainActivity，并调用loadData方法刷新数据
-            MainActivity mainActivity = (MainActivity) context;
-            mainActivity.notifyLoadData();
-            Toast.makeText(context, "成功恢复" + sumCount + "个联系人", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "恢复成功", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(context, "联系人备份失败", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "恢复失败", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     protected void onProgressUpdate(Void... values) {
-        pbarDialog.setProgress((int) (proNum * (100.0 / sumCount)));
-        pbarDialog.setProgressNumberFormat(proNum + "/" + sumCount);
+        pbarDialog.setProgress((int) (proNum * (100.0 / totalCount)));
+        pbarDialog.setProgressNumberFormat(proNum + "/" + totalCount);
     }
 
     /**
@@ -265,33 +275,43 @@ public class RestoreTask extends AsyncTask<Void, Void, String> {
         ContentProviderOperation operation2 = ContentProviderOperation.newInsert(uri)
                 // 第二个参数int previousResult:表示上一个操作的位于operations的第0个索引，
                 // 所以能够将上一个操作返回的raw_contact_id作为该方法的参数
-                .withValueBackReference("raw_contact_id", 0)
-                .withValue("mimetype", "vnd.android.cursor.item/name")
+                .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, "vnd.android.cursor.item/name")
                 .withValue("data2", values.get("name"))
                 .build();
 
-        // 操作3.添加data表中phone字段
-        uri = Uri.parse("content://com.android.contacts/data");
-        ContentProviderOperation operation3 = ContentProviderOperation.newInsert(uri)
-                .withValueBackReference("raw_contact_id", 0)
-                .withValue("mimetype", "vnd.android.cursor.item/phone_v2")
-                .withValue("data2", "2")
-                .withValue("data1", values.get("phone"))
-                .build();
+
+        String[] arr = values.get("phone").toString().split(",");
+        List<ContentProviderOperation> list = new ArrayList<>();
+        for (String phone : arr) {
+            if (phone.equals(""))
+                continue;
+
+            // 操作3.添加data表中phone字段
+            uri = Uri.parse("content://com.android.contacts/data");
+            ContentProviderOperation operationT = ContentProviderOperation.newInsert(uri)
+                    .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                    .withValue(ContactsContract.Data.MIMETYPE, "vnd.android.cursor.item/phone_v2")
+                    .withValue("data2", "2")
+                    .withValue("data1", phone)
+                    .build();
+            list.add(operationT);
+        }
 
         // 操作4.添加data表中的Email字段
         uri = Uri.parse("content://com.android.contacts/data");
         ContentProviderOperation operation4 = ContentProviderOperation
-                .newInsert(uri).withValueBackReference("raw_contact_id", 0)
-                .withValue("mimetype", "vnd.android.cursor.item/email_v2")
+                .newInsert(uri).withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, 0)
+                .withValue(ContactsContract.Data.MIMETYPE, "vnd.android.cursor.item/email_v2")
                 .withValue("data2", "2")
                 .withValue("data1", values.get("email")).build();
 
         operations.add(operation);
         operations.add(operation2);
-        operations.add(operation3);
         operations.add(operation4);
-
+        for (ContentProviderOperation op : list) {
+            operations.add(op);
+        }
         try {
             resolver.applyBatch("com.android.contacts", operations);
         } catch (Exception e) {

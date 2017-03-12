@@ -59,6 +59,7 @@ public class FileInfo implements Comparable {
                 if (this.name == null || this.name.equals("")) {
                     this.name = this.time;
                 }
+                isr.close();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             } catch (FileNotFoundException e) {
@@ -76,12 +77,24 @@ public class FileInfo implements Comparable {
     public void updateCount() {
         SAXReader reader = new SAXReader();
         try {
-            Document document = reader.read(new File(path + Constants.File_Contacts));
-            countContacts = document.getRootElement().elements().size();
-            document = reader.read(new File(path + Constants.File_SMS));
-            countSMS = document.getRootElement().elements().size();
-            document = reader.read(new File(path + Constants.File_CallLog));
-            countCallLog = document.getRootElement().elements().size();
+            Document document;
+            File file = new File(path + Constants.File_Contacts);
+            if (file.exists()) {
+                document = reader.read(file);
+                countContacts = document.getRootElement().elements().size();
+            }
+
+            file = new File(path + Constants.File_SMS);
+            if (file.exists()) {
+                document = reader.read(file);
+                countSMS = document.getRootElement().elements().size();
+            }
+
+            file = new File(path + Constants.File_CallLog);
+            if (file.exists()) {
+                document = reader.read(file);
+                countCallLog = document.getRootElement().elements().size();
+            }
         } catch (DocumentException e) {
             e.printStackTrace();
         }

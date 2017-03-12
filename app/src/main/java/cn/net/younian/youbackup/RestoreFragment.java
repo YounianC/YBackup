@@ -114,6 +114,20 @@ public class RestoreFragment extends Fragment {
 
     @TargetApi(Build.VERSION_CODES.N)
     public void restore() {
+        if (ifSMSChecked) {
+            String defaultSmsPkg = Telephony.Sms.getDefaultSmsPackage(getActivity());
+            String mySmsPkg = getActivity().getPackageName();
+            if (!defaultSmsPkg.equals(mySmsPkg)) {
+                //如果这个App不是默认的Sms App，则修改成默认的SMS APP
+                //因为从Android 4.4开始，只有默认的SMS APP才能对SMS数据库进行处理
+                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, mySmsPkg);
+                getActivity().startActivity(intent);
+                Toast.makeText(getActivity(), "请更换短信应用后重新点击恢复，本次恢复终止", Toast.LENGTH_LONG).show();
+                return;
+            }
+        }
+
         CheckBox checkContacts = (CheckBox) getActivity().findViewById(R.id.restore_check_contacts);
         CheckBox checkSMS = (CheckBox) getActivity().findViewById(R.id.restore_check_sms);
         CheckBox checkCallLog = (CheckBox) getActivity().findViewById(R.id.restore_check_log);
@@ -129,21 +143,6 @@ public class RestoreFragment extends Fragment {
         rContactsType = spinnerContacts.getSelectedItemId();
         rSMSType = spinnerSMS.getSelectedItemId();
         rCallLogType = spinnerCallLog.getSelectedItemId();
-
-        if (ifSMSChecked) {
-            String defaultSmsPkg = Telephony.Sms.getDefaultSmsPackage(getActivity());
-            String mySmsPkg = getActivity().getPackageName();
-            if (!defaultSmsPkg.equals(mySmsPkg)) {
-                //如果这个App不是默认的Sms App，则修改成默认的SMS APP
-                //因为从Android 4.4开始，只有默认的SMS APP才能对SMS数据库进行处理
-                Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-                intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, mySmsPkg);
-                getActivity().startActivity(intent);
-                Toast.makeText(getActivity(), "请更换短信应用后重新点击恢复，本次恢复终止", Toast.LENGTH_LONG).show();
-                return;
-            }
-        }
-
 
         JSONObject config = new JSONObject();
         try {

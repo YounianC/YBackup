@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     private Fragment manulBackupFragment;
     private Fragment settingFragment;
     private Fragment restoreFragment;
+    private Fragment infoFragment;
 
     private FloatingActionsMenu menuMultipleActions;
     private Menu menu;
@@ -128,7 +129,10 @@ public class MainActivity extends AppCompatActivity
             if (settingFragment == null)
                 settingFragment = new SettingFragment();
             switchContent(item.getTitle().toString(), mFragment, settingFragment);
-
+        } else if (id == R.id.nav_info) {
+            if (infoFragment == null)
+                infoFragment = new InfoFragment();
+            switchContent(item.getTitle().toString(), mFragment, infoFragment);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -178,16 +182,13 @@ public class MainActivity extends AppCompatActivity
         switchContent("还原 - " + info.getName(), mFragment, restoreFragment);
     }
 
-    public void notifyAutoBackup(boolean flag) {
-        if (flag) {
-            Toast.makeText(this, "===自动备份开始==", Toast.LENGTH_SHORT).show();
-            Message msg = new Message();
-            Bundle b = new Bundle();// 存放数据
-            b.putString("color", "我的");
-            backupHandler.sendMessage(msg);
-        } else {
-            Toast.makeText(this, "跳过本次自动备份", Toast.LENGTH_SHORT).show();
-        }
+    public void notifyBackup(String config) {
+        Message msg = new Message();
+        msg.what = Constants.MSG_BACKUP;
+        Bundle b = new Bundle();// 存放数据
+        b.putString("config", config);
+        msg.setData(b);
+        backupHandler.sendMessage(msg);
     }
 
     public void manualBackup(View view) {
@@ -198,10 +199,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void quickBackup(View view) {
-        Message msg = new Message();
-        Bundle b = new Bundle();// 存放数据
-        b.putString("color", "我的");
-        backupHandler.sendMessage(msg);
+        notifyBackup(Constants.BackupItem_All);
         menuMultipleActions.toggle();
     }
 }

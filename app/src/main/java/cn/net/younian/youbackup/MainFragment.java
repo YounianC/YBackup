@@ -139,13 +139,19 @@ public class MainFragment extends Fragment {
         SharedPreferences sp = view.getContext().getSharedPreferences(Constants.SharedPreferencesName, Context.MODE_PRIVATE);
         if (sp.getBoolean(Constants.Setting_AutoBackup, false)) {
             String time = list.size() > 0 ? list.get(0).getTime() : "";
-            if (time.equals("")) {
-                ((MainActivity) view.getContext()).notifyAutoBackup(true);
+            if (time.equals("") || sp.getInt(Constants.Setting_AutoBackupTime, 24) == 0) {
+                Toast.makeText(getActivity(), "===自动备份开始==", Toast.LENGTH_SHORT).show();
+                ((MainActivity) view.getContext()).notifyBackup(Constants.BackupItem_All);
                 return;
             }
             try {
                 long t = (new Date().getTime() - Constants.formatDate.parse(time).getTime()) / 1000 / 60 / 60;
-                ((MainActivity) view.getContext()).notifyAutoBackup(t > sp.getInt(Constants.Setting_AutoBackupTime, 24));
+                if (t > sp.getInt(Constants.Setting_AutoBackupTime, 24)) {
+                    Toast.makeText(getActivity(), "===自动备份开始==", Toast.LENGTH_SHORT).show();
+                    ((MainActivity) view.getContext()).notifyBackup(Constants.BackupItem_All);
+                } else {
+                    Toast.makeText(getActivity(), "跳过本次自动备份", Toast.LENGTH_SHORT).show();
+                }
             } catch (ParseException e) {
                 e.printStackTrace();
             }

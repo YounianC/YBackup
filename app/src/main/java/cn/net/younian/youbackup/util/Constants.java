@@ -13,14 +13,12 @@ import android.os.Environment;
 
 @TargetApi(Build.VERSION_CODES.N)
 public class Constants {
-    public static DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    public static DateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static DateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String defaultPath = Environment.getExternalStorageDirectory() + "/YBackUp/";
 
     static {
         formatDate.setTimeZone(TimeZone.getTimeZone("GMT+08"));
-        formatTime.setTimeZone(TimeZone.getTimeZone("GMT+08"));
     }
 
     public static final String SharedPreferencesName = "ybackup";
@@ -39,4 +37,12 @@ public class Constants {
     public static final String File_SMS = "sms.xml";
     public static final String File_CallLog = "calllog.xml";
     public static final String File_Info = "info.txt";
+
+
+    public static final String BackupItem_All = "BackupItem_All";
+    public static final String BackupItem_Contact = "BackupItem_Contact";
+    public static final String BackupItem_SMS = "BackupItem_SMS";
+    public static final String BackupItem_Call = "BackupItem_Call";
+
+    public static final int MSG_BACKUP = 1;
 }
